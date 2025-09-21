@@ -6,16 +6,17 @@ import { RouterLink } from 'vue-router';
 
 type Props = {
   data: Section
+  to: string
 }
 
-const { data } = defineProps<Props>()
+const { data, to } = defineProps<Props>()
 
 const progress = ref(data.progress)
 
 </script>
 
 <template>
-  <UiCard :as="RouterLink" to="/" class="gap-2" hoverable>
+  <UiCard :as="RouterLink" :to="to" class="gap-2" hoverable>
     <CardHeader>
       <CardTitle class="font-bold text-2xl text-gray-800"> {{ data.title }}</CardTitle>
     </CardHeader>
