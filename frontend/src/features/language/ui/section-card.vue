@@ -16,12 +16,12 @@ const progress = ref(data.progress)
 </script>
 
 <template>
-  <UiCard :as="RouterLink" :to="to" class="gap-2" hoverable>
-    <CardHeader>
-      <CardTitle class="font-bold text-2xl text-gray-800"> {{ data.title }}</CardTitle>
-    </CardHeader>
-    <CardContent>
-      <UiProgress class="h-4" v-model="progress" />
-    </CardContent>
-  </UiCard>
+  <ui-card :as="RouterLink" :to="to" class="gap-2" hoverable>
+    <card-header>
+      <card-title class="font-bold text-2xl text-gray-800"> {{ data.title }}</card-title>
+    </card-header>
+    <card-content>
+      <ui-progress class="h-4" v-model="progress" />
+    </card-content>
+  </ui-card>
 </template>

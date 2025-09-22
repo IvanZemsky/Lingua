@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import LessonBtn from '@/features/language/ui/LessonBtn.vue';
-import UnitDescCard from '@/features/language/ui/UnitDescCard.vue'
+import LessonBtn from '@/features/language/ui/lesson-btn.vue';
+import UnitDescCard from '@/features/language/ui/unit-desc-card.vue'
 </script>
 
 <template>
@@ -15,5 +15,3 @@ import UnitDescCard from '@/features/language/ui/UnitDescCard.vue'
     </div>
   </div>
 </template>
-
-<style scoped></style>

@@ -1,1 +1,1 @@
-export { default as Progress } from "./UiProgress.vue"
+export { default as Progress } from "./ui-progress.vue"

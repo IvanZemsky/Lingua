@@ -1,1 +1,1 @@
-export { default as Textarea } from "./UiTextarea.vue"
+export { default as Textarea } from "./ui-textarea.vue"
