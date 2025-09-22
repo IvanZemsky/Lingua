@@ -2,7 +2,7 @@
 
 <template>
   <main>
-    <div class="container mx-auto p-4  h-screen">
+    <div class="container mx-auto p-4 h-screen">
       <router-view />
     </div>
   </main>

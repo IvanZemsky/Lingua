@@ -1,17 +1,25 @@
 <script setup lang="ts">
-import LessonBtn from '@/features/language/ui/lesson-btn.vue';
-import UnitDescCard from '@/features/language/ui/unit-desc-card.vue'
+import { MOCK_COURSE } from "@/entities/language"
+import { useRoute } from "vue-router"
+import { UnitsList, UnitDescCard } from "@/features/language"
+
+const route = useRoute()
+const sectionNumber = parseFloat(route.params.sectionNumber as string)
+
+const section = MOCK_COURSE.SECTIONS[sectionNumber]
+const units = MOCK_COURSE.UNITS.filter(
+  (unit) => unit.sectionNumber === sectionNumber,
+)
 </script>
 
 <template>
   <div class="relative pt-25">
-    <UnitDescCard title="Section 1, Unit 1" subtitle="Use basic phrases" class="fixed top-5 left-4 right-4" />
+    <UnitDescCard
+      :title="`Section ${sectionNumber}, Unit 1`"
+      subtitle="Use basic phrases"
+      class="fixed top-5 left-4 right-4"
+    />
 
-    <div class="flex flex-col items-center gap-8">
-      <LessonBtn variant="completed" />
-      <LessonBtn variant="active" />
-      <LessonBtn variant="unreached" />
-
-    </div>
+    <UnitsList :data="units" />
   </div>
 </template>

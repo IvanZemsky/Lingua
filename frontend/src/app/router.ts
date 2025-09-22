@@ -13,10 +13,15 @@ const router = createRouter({
           component: () => import("@/pages/sections-page.vue"),
         },
         {
-          path: "sections/:id",
+          path: "sections/:sectionNumber",
           name: "section",
           component: () => import("@/pages/section-page.vue"),
-        }
+        },
+        {
+          path: "sections/:sectionNumber/lessons/:lessonNumber/variants/:variantNumber",
+          name: "lesson",
+          component: () => import("@/pages/lesson-page.vue"),
+        },
       ],
     },
   ],
