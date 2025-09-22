@@ -2,7 +2,7 @@
 import { SectionCard } from "@/features/language"
 
 const data = {
-  id: "1",
+  number: 1,
   title: "Section 1",
   progress: 50,
 }
@@ -10,6 +10,6 @@ const data = {
 
 <template>
   <div class="flex flex-col gap-4">
-    <SectionCard :data="data" :to="`/sections/${data.id}`" />
+    <SectionCard :data="data" :to="`/sections/${data.number}`" />
   </div>
 </template>

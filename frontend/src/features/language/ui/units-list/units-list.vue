@@ -12,15 +12,13 @@ type Props = {
 
 const { data } = defineProps<Props>()
 
-const { targetRef, desc } =
-  useUnitDescCard(
-    {
-      unitTitle: data[0].title,
-      unitNumber: data[0].number,
-    },
-    data,
-  )
-
+const { targetRef, desc } = useUnitDescCard(
+  {
+    unitTitle: data[0].title,
+    unitNumber: data[0].number,
+  },
+  data,
+)
 </script>
 
 <template>
