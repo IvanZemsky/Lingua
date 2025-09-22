@@ -1,3 +1,3 @@
 export default {
-  publicPath: '/lingua/',
+  publicPath: '/Lingua/',
 }
