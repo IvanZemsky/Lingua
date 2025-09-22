@@ -26,17 +26,17 @@ export const MOCK_COURSE: { SECTIONS: Section[]; UNITS: Unit[] } = {
           currentVariant: 1,
         },
         {
-          number: 1,
-          totalVariants: 3,
-          currentVariant: 1,
-        },
-        {
-          number: 2,
-          totalVariants: 3,
-          currentVariant: 1,
-        },
-        {
           number: 3,
+          totalVariants: 3,
+          currentVariant: 1,
+        },
+        {
+          number: 4,
+          totalVariants: 3,
+          currentVariant: 1,
+        },
+        {
+          number: 6,
           totalVariants: 1,
           currentVariant: 1,
         },
@@ -59,17 +59,17 @@ export const MOCK_COURSE: { SECTIONS: Section[]; UNITS: Unit[] } = {
           currentVariant: 1,
         },
         {
-          number: 1,
-          totalVariants: 3,
-          currentVariant: 1,
-        },
-        {
-          number: 2,
-          totalVariants: 3,
-          currentVariant: 1,
-        },
-        {
           number: 3,
+          totalVariants: 3,
+          currentVariant: 1,
+        },
+        {
+          number: 4,
+          totalVariants: 3,
+          currentVariant: 1,
+        },
+        {
+          number: 5,
           totalVariants: 1,
           currentVariant: 1,
         },
