@@ -1,0 +1,11 @@
+openapi: 3.1.0
+
+info:
+  title: Lingua API
+  description: API for Lingua application
+  version: 1.0.0
+
+paths:
+  /sections:
+    get:
+      $ref: './endpoints/sections.yml#/getAllSections'

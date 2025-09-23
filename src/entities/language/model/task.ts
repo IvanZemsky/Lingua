@@ -1,3 +1,5 @@
+import type { Word } from "./types"
+
 export type Task =
   | TaskListenAndWriteAll
   | TaskTranslateAll
@@ -11,25 +13,25 @@ export type TaskBase = {
 
 export type TaskListenAndWriteAll = TaskBase & {
   type: "listen-and-write-all"
-  text: string
+  text: Word[]
   translations: string[]
 }
 
 export type TaskTranslateAll = TaskBase & {
   type: "translate-all"
-  text: string
+  text: Word[]
   translations: string[]
 }
 
 export type TaskTranslatePart = TaskBase & {
   type: "translate-part"
-  text: (string | { text: string; translation: string })[]
+  text: Word[]
   translations: string[]
 }
 
 export type TaskPlaceInOrder = TaskBase & {
   type: "place-in-order"
-  text: string
+  text: Word[]
   words: string[]
 }
 

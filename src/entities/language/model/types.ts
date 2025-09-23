@@ -1,10 +1,7 @@
-import type { Task } from "../task/types"
+import type { APISchemas } from "@/shared/api"
+import type { Task } from "./task"
 
-export type Section = {
-  number: number
-  progress: number
-  title: string
-}
+export type Section = APISchemas["Section"]
 
 export type Unit = {
   number: number
@@ -23,4 +20,10 @@ export type Lesson = {
 export type Variant = {
   lessonNumber: number
   tasks: Task[]
+}
+
+export type Word = {
+  id: string
+  text: string
+  transcription: string[]
 }

@@ -16,21 +16,28 @@ export function useUnitDescCard(defaultDesc: UnitDescInfo, data: Unit[]) {
     targetRef,
     ([entry]) => {
       if (entry.isIntersecting) {
-        console.log(entry)
-        const unitNumber = parseInt(
-          entry.target.getAttribute("data-unit") as string,
-        )
+        const unitNumber = getDataUnit(entry.target)
         if (!unitNumber) return
-        const unitTitle = data.find((unit) => unit.number === unitNumber)?.title
 
-        if (unitNumber && unitTitle) {
-          desc.value.unitNumber = unitNumber
-          desc.value.unitTitle = unitTitle
-        }
+        setDesc(unitNumber)
       }
     },
     { threshold: new Array(data.length).fill(0.7) },
   )
+
+  const setDesc = (unitNumber: number) => {
+    const unitTitle = data.find((unit) => unit.number === unitNumber)?.title
+
+    if (unitNumber && unitTitle) {
+      desc.value.unitNumber = unitNumber
+      desc.value.unitTitle = unitTitle
+    }
+  }
+
+  const getDataUnit = (el: Element): number | null => {
+    const dataUnitNumber = el.getAttribute("data-unit")
+    return dataUnitNumber ? parseInt(dataUnitNumber) : null
+  }
 
   return { targetRef, desc }
 }

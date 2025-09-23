@@ -1,6 +1,8 @@
-export { MOCK_COURSE } from "./mocks/data"
+import MOCK_COURSE from "./mocks/course.json"
 
-export type { Section, Unit, Variant, Lesson } from "./model/types"
+export { MOCK_COURSE }
+
+export type { Section, Unit, Variant, Lesson, Word } from "./model/types"
 export type {
   Task,
   TaskType,
@@ -8,4 +10,6 @@ export type {
   TaskListenAndWriteAll,
   TaskTranslateAll,
   TaskTranslatePart,
-} from "./task/types"
+} from "./model/task"
+
+export {useGetAllSectionsQuery} from "./api/get-all-sections"

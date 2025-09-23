@@ -1,0 +1,38 @@
+schemas:
+  Section:
+    type: object
+    required:
+      - id
+      - number
+      - title
+      - progress
+    properties:
+      id:
+        type: string
+        # format: uuid
+        description: Unique identifier for the section
+      number:
+        type: integer
+        description: Section number
+      title:
+        type: string
+        description: Title of the section
+      progress:
+        type: integer
+        description: Progress percentage of the section (0 to 100)
+  SectionList:
+    type: array
+    items:
+      $ref: '#/schemas/Section'
+
+getAllSections:
+  description: Retrieve a list of sections
+  responses:
+    '200':
+      description: A list of sections
+      content:
+        application/json:
+          schema:
+            $ref: '#/schemas/SectionList'
+      '400':
+        $ref: '../shared/responses.yml#/BadRequestError'

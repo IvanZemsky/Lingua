@@ -1,6 +1,5 @@
 {
   "name": "lingua-latina",
-  
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -15,6 +14,7 @@
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
+    "api": "npx openapi-typescript ./src/shared/api/schema/main.yml -o ./src/shared/api/schema/generated.ts",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
@@ -24,6 +24,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-vue-next": "^0.544.0",
+    "openapi-fetch": "^0.14.0",
     "pinia": "^3.0.3",
     "reka-ui": "^2.5.0",
     "tailwind-merge": "^3.3.1",
@@ -43,11 +44,18 @@
     "eslint-plugin-vue": "~10.3.0",
     "gh-pages": "^6.3.0",
     "jiti": "^2.4.2",
+    "msw": "^2.11.3",
     "npm-run-all2": "^8.0.4",
+    "openapi-typescript": "^7.9.1",
     "prettier": "3.6.2",
     "typescript": "~5.8.0",
     "vite": "^7.0.6",
     "vite-plugin-vue-devtools": "^8.0.0",
     "vue-tsc": "^3.0.4"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

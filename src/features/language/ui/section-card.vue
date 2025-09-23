@@ -24,8 +24,8 @@ const progress = ref(data.progress)
   <ui-card :as="RouterLink" :to="to" class="gap-2" hoverable>
     <card-header>
       <card-title class="font-bold text-2xl text-gray-800">
-        {{ data.title }}</card-title
-      >
+        {{ data.title }}
+      </card-title>
     </card-header>
     <card-content>
       <ui-progress class="h-4" v-model="progress" />

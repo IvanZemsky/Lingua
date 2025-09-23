@@ -1,15 +1,19 @@
 <script setup lang="ts">
+import { useGetAllSectionsQuery } from "@/entities/language"
 import { SectionCard } from "@/features/language"
 
-const data = {
-  number: 1,
-  title: "Section 1",
-  progress: 50,
-}
+const { data, isFetching, error } = useGetAllSectionsQuery().json()
 </script>
 
 <template>
-  <div class="flex flex-col gap-4">
-    <SectionCard :data="data" :to="`/sections/${data.number}`" />
+  <p v-if="isFetching" class="">Loading...</p>
+  <div class="flex flex-col gap-4" v-if="data">
+    <SectionCard
+      v-for="card in data"
+      :key="card.number"
+      :data="card"
+      :to="`/sections/${card.number}`"
+    />
   </div>
+  <p v-if="error" class="text-red-500">Error: {{ error.message }}</p>
 </template>
