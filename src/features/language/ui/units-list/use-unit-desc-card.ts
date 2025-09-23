@@ -1,16 +1,14 @@
 import type { Unit } from "@/entities/language"
 import { useIntersectionObserver } from "@vueuse/core"
-import { ref, shallowRef } from "vue"
+import { ref, shallowRef, type Ref } from "vue"
 
-type UnitDescInfo = {
-  unitTitle: string
-  unitNumber: number
-}
-
-export function useUnitDescCard(defaultDesc: UnitDescInfo, data: Unit[]) {
+export function useUnitDescCard(data: Ref<Unit[] | null>) {
   const targetRef = shallowRef<HTMLDivElement | null>(null)
 
-  const desc = ref<{ unitTitle: string; unitNumber: number }>(defaultDesc)
+  const desc = ref<{ unitTitle: string; unitNumber: number }>({
+    unitTitle: data.value?.[0].title ?? "",
+    unitNumber: data.value?.[0].number ?? 0,
+  })
 
   useIntersectionObserver(
     targetRef,
@@ -22,11 +20,14 @@ export function useUnitDescCard(defaultDesc: UnitDescInfo, data: Unit[]) {
         setDesc(unitNumber)
       }
     },
-    { threshold: new Array(data.length).fill(0.7) },
+    { threshold: data ? new Array(data.value?.length).fill(0.7) : [] },
   )
 
   const setDesc = (unitNumber: number) => {
-    const unitTitle = data.find((unit) => unit.number === unitNumber)?.title
+    if (!data) return
+    const unitTitle = data.value?.find(
+      (unit) => unit.number === unitNumber,
+    )?.title
 
     if (unitNumber && unitTitle) {
       desc.value.unitNumber = unitNumber

@@ -1,0 +1,76 @@
+schemas:
+  Unit:
+    type: object
+    required:
+      - id
+      - number
+      - sectionNumber
+      - title
+      - description
+      - lessons
+    properties:
+      id:
+        type: string
+        # format: uuid
+        description: Unique identifier for the unit
+      number:
+        type: integer
+        description: Unit number
+      title:
+        type: string
+        description: Title of the unit
+      description:
+        type: string
+        description: Description of the unit
+      sectionNumber:
+        type: integer
+        description: Section number of the unit
+      lessons:
+        type: array
+        items:
+          $ref: "#/schemas/Lesson"
+
+  Lesson:
+    type: object
+    required:
+      - id
+      - number
+      - totalVariants
+      - currentVariant
+    properties:
+      id:
+        type: string
+        # format: uuid
+        description: Unique identifier for the lesson
+      number:
+        type: integer
+        description: Lesson number
+      totalVariants:
+        type: integer
+        description: Total number of variants in the lesson
+      currentVariant:
+        type: integer
+        description: Current variant number
+  UnitList:
+    type: array
+    items:
+      $ref: "#/schemas/Unit"
+
+getUnitsBySectionNumber:
+  description: Retrieve a list of units
+  parameters:
+    - name: sectionNumber
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Section Number
+  responses:
+    "200":
+      description: A list of units
+      content:
+        application/json:
+          schema:
+            $ref: "#/schemas/UnitList"
+    "404":
+      $ref: "../shared/responses.yml#/NotFoundError"

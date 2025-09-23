@@ -1,29 +1,32 @@
 <script setup lang="ts">
 import type { Unit } from "@/entities/language"
 import LessonBtn from "./lesson-btn.vue"
+import ListHeader from "./list-header.vue"
 import { RouterLink } from "vue-router"
 import UnitDescCard from "./unit-desc-card.vue"
 import { useUnitDescCard } from "./use-unit-desc-card"
+import { toRefs } from "vue"
 
 type Props = {
   sectionNumber: number
-  data: Unit[]
+  data: Unit[] | null
+  isFetching: boolean
+  error: unknown
 }
 
-const { data } = defineProps<Props>()
+const props = defineProps<Props>()
 
-const { targetRef, desc } = useUnitDescCard(
-  {
-    unitTitle: data[0].title,
-    unitNumber: data[0].number,
-  },
-  data,
-)
+const { data } = toRefs(props)
+
+const { targetRef, desc } = useUnitDescCard(data)
 </script>
 
 <template>
   <div class="flex flex-col items-center gap-8">
+    <p v-if="isFetching">Loading...</p>
+    <p v-if="error">An error occurred</p>
     <UnitDescCard
+      v-if="data && desc.unitNumber"
       :title="`Section ${sectionNumber}, Unit ${desc.unitNumber}`"
       :subtitle="desc.unitTitle"
       class="fixed top-5 left-4 right-4"
@@ -36,11 +39,7 @@ const { targetRef, desc } = useUnitDescCard(
       :data-unit="unit.number"
       ref="targetRef"
     >
-      <h2 v-if="i !== 0" class="w-full flex items-center gap-2 mb-8">
-        <div class="h-0.5 flex-grow bg-gray-200"></div>
-        <span class="font-bold text-gray-400 text-xl">{{ unit.title }}</span>
-        <div class="h-0.5 flex-grow bg-gray-200"></div>
-      </h2>
+      <ListHeader v-if="i !== 0" :title="unit.title" />
 
       <div class="flex flex-col items-center gap-6">
         <LessonBtn

@@ -9,3 +9,7 @@ paths:
   /sections:
     get:
       $ref: './endpoints/sections.yml#/getAllSections'
+
+  /sections/{sectionNumber}/units:
+    get:
+      $ref: './endpoints/units.yml#/getUnitsBySectionNumber'

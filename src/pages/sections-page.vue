@@ -2,7 +2,7 @@
 import { useGetAllSectionsQuery } from "@/entities/language"
 import { SectionCard } from "@/features/language"
 
-const { data, isFetching, error } = useGetAllSectionsQuery().json()
+const { data, isFetching, error } = useGetAllSectionsQuery()
 </script>
 
 <template>

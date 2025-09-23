@@ -40,6 +40,46 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/sections/{sectionNumber}/units": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Retrieve a list of units */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description Section Number */
+                    sectionNumber: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description A list of units */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["UnitList"];
+                    };
+                };
+                404: components["responses"]["NotFoundError"];
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -55,8 +95,46 @@ export interface components {
             progress: number;
         };
         SectionList: components["schemas"]["Section"][];
+        Lesson: {
+            /** @description Unique identifier for the lesson */
+            id: string;
+            /** @description Lesson number */
+            number: number;
+            /** @description Total number of variants in the lesson */
+            totalVariants: number;
+            /** @description Current variant number */
+            currentVariant: number;
+        };
+        Unit: {
+            /** @description Unique identifier for the unit */
+            id: string;
+            /** @description Unit number */
+            number: number;
+            /** @description Title of the unit */
+            title: string;
+            /** @description Description of the unit */
+            description: string;
+            /** @description Section number of the unit */
+            sectionNumber: number;
+            lessons: components["schemas"]["Lesson"][];
+        };
+        UnitList: components["schemas"]["Unit"][];
+        Error: {
+            message: string;
+            code: string;
+        };
     };
-    responses: never;
+    responses: {
+        /** @description Resource not found */
+        NotFoundError: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["Error"];
+            };
+        };
+    };
     parameters: never;
     requestBodies: never;
     headers: never;

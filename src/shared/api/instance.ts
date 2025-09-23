@@ -1,7 +1,9 @@
-import createFetchClient from "openapi-fetch";
-import { CONFIG } from "../model";
+import { createFetch } from "@vueuse/core"
+import { CONFIG } from "../model"
 
-// types <>
-export const API = createFetchClient({
-  baseUrl: CONFIG.API_BASE_URL
+export const useFetchClient = createFetch({
+  baseUrl: CONFIG.API_BASE_URL,
+  fetchOptions: {
+    mode: "cors",
+  },
 })

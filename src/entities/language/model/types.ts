@@ -3,13 +3,7 @@ import type { Task } from "./task"
 
 export type Section = APISchemas["Section"]
 
-export type Unit = {
-  number: number
-  sectionNumber: number
-  title: string
-  description: string
-  lessons: Lesson[]
-}
+export type Unit = APISchemas["Unit"]
 
 export type Lesson = {
   number: number

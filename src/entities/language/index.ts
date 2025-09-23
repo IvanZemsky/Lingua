@@ -1,7 +1,3 @@
-import MOCK_COURSE from "./mocks/course.json"
-
-export { MOCK_COURSE }
-
 export type { Section, Unit, Variant, Lesson, Word } from "./model/types"
 export type {
   Task,
@@ -13,3 +9,4 @@ export type {
 } from "./model/task"
 
 export {useGetAllSectionsQuery} from "./api/get-all-sections"
+export {useGetUnitsBySectionNumberQuery} from "./api/get-units-by-section-number"

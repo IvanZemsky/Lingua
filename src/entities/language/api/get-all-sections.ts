@@ -1,6 +1,6 @@
-import { useFetch } from "@vueuse/core"
 import { type Section } from "../model/types"
+import { useFetchClient } from "@/shared/api"
 
 export function useGetAllSectionsQuery() {
-  return useFetch<Section[]>("/api/sections")
+  return useFetchClient<Section[]>("/sections").json()
 }
