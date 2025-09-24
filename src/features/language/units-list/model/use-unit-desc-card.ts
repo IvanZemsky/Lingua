@@ -1,11 +1,9 @@
-import type {  UnitWithProgress } from "@/entities/language"
+import type { UnitWithProgress } from "@/entities/language"
 import { useIntersectionObserver } from "@vueuse/core"
-import { ref, shallowRef, type Ref } from "vue"
-
-
+import { ref, type Ref } from "vue"
 
 export function useUnitDescCard(data: Ref<UnitWithProgress[] | null>) {
-  const targetRef = shallowRef<HTMLDivElement | null>(null)
+  const targetRefs = ref<HTMLElement[]>([])
 
   const desc = ref<{ unitTitle: string; unitNumber: number }>({
     unitTitle: data.value?.[0].title ?? "",
@@ -13,35 +11,31 @@ export function useUnitDescCard(data: Ref<UnitWithProgress[] | null>) {
   })
 
   useIntersectionObserver(
-    targetRef,
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        const unitNumber = getDataUnit(entry.target)
-        if (!unitNumber) return
+    targetRefs,
+    (entries) => {
+      const visible = entries.find((e) => e.isIntersecting)
+      if (!visible) return
 
-        setDesc(unitNumber)
-      }
+      const unitNumber = getDataUnit(visible.target)
+      if (!unitNumber) return
+      
+      setDesc(unitNumber)
     },
-    { threshold: data ? new Array(data.value?.length).fill(0.7) : [] },
+    {
+      threshold: 0.7,
+    },
   )
 
-  const setDesc = (unitNumber: number) => {
-    if (!data) return
-
-    const unitTitle = data.value?.find(
-      (unit) => unit.number === unitNumber,
-    )?.title
-
-    if (unitNumber && unitTitle) {
-      desc.value.unitNumber = unitNumber
-      desc.value.unitTitle = unitTitle
-    }
+  function setDesc(unitNumber: number) {
+    const unitTitle = data.value?.find((u) => u.number === unitNumber)?.title
+    if (!unitTitle) return
+    desc.value = { unitTitle, unitNumber }
   }
 
-  const getDataUnit = (el: Element): number | null => {
+  function getDataUnit(el: Element): number | null {
     const dataUnitNumber = el.getAttribute("data-unit")
     return dataUnitNumber ? parseInt(dataUnitNumber) : null
   }
 
-  return { targetRef, desc }
+  return { targetRefs, desc }
 }

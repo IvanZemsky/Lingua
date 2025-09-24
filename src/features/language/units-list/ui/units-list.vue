@@ -5,7 +5,7 @@ import ListHeader from "./list-header.vue"
 import { RouterLink } from "vue-router"
 import UnitDescCard from "./unit-desc-card.vue"
 import { useUnitDescCard } from "../model/use-unit-desc-card"
-import { toRefs } from "vue"
+import { ref, toRefs } from "vue"
 
 type Props = {
   sectionNumber: number
@@ -15,19 +15,21 @@ type Props = {
 }
 
 const props = defineProps<Props>()
-
 const { data } = toRefs(props)
 
-const { targetRef, desc } = useUnitDescCard(data)
+const root = ref<HTMLDivElement | null>(null)
+defineExpose({ root })
+
+const { targetRefs, desc } = useUnitDescCard(data)
 </script>
 
 <template>
-  <div class="flex flex-col items-center gap-8">
+  <div class="flex flex-col items-center gap-8" ref="root">
     <p v-if="isFetching">Loading...</p>
     <p v-if="error">An error occurred</p>
 
     <UnitDescCard
-      v-if="data && desc.unitNumber"
+      v-if="data?.length && desc.unitTitle"
       :title="`Section ${sectionNumber}, Unit ${desc.unitNumber}`"
       :subtitle="desc.unitTitle"
       class="fixed top-5 left-4 right-4"
@@ -38,7 +40,7 @@ const { targetRef, desc } = useUnitDescCard(data)
       v-for="(unit, i) in data"
       :key="unit.number"
       :data-unit="unit.number"
-      ref="targetRef"
+      ref="targetRefs"
     >
       <ListHeader v-if="i !== 0" :title="unit.title" />
 
