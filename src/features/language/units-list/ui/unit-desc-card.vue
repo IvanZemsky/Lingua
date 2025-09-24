@@ -11,7 +11,7 @@ const props = defineProps<Props>()
 </script>
 
 <template>
-  <ui-card class="flex-row gap-0 py-0">
+  <ui-card class="relative z-80 flex-row gap-0 py-0">
     <card-header class="gap-0 flex-grow p-4">
       <card-title class="uppercase font-semibold text-gray-600">
         {{ props.title }}</card-title

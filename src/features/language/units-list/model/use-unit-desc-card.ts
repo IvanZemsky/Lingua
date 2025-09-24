@@ -1,8 +1,10 @@
-import type { Unit } from "@/entities/language"
+import type {  UnitWithProgress } from "@/entities/language"
 import { useIntersectionObserver } from "@vueuse/core"
 import { ref, shallowRef, type Ref } from "vue"
 
-export function useUnitDescCard(data: Ref<Unit[] | null>) {
+
+
+export function useUnitDescCard(data: Ref<UnitWithProgress[] | null>) {
   const targetRef = shallowRef<HTMLDivElement | null>(null)
 
   const desc = ref<{ unitTitle: string; unitNumber: number }>({
@@ -25,6 +27,7 @@ export function useUnitDescCard(data: Ref<Unit[] | null>) {
 
   const setDesc = (unitNumber: number) => {
     if (!data) return
+
     const unitTitle = data.value?.find(
       (unit) => unit.number === unitNumber,
     )?.title

@@ -4,9 +4,11 @@ import { cva } from "class-variance-authority"
 import { Star, Check } from "lucide-vue-next"
 import { Primitive, type PrimitiveProps } from "reka-ui"
 import { type HTMLAttributes } from "vue"
+import { withDefaults, defineProps } from "vue"
+import DonutChart from "@/shared/ui/kit/donut-chart.vue"
 
 type Props = PrimitiveProps & {
-  variant: "completed" | "unreached" | "active"
+  status: "completed" | "unreached" | "active"
   class?: HTMLAttributes["class"]
 }
 
@@ -21,10 +23,10 @@ const icons = {
 }
 
 const variants = cva(
-  "w-17 h-17 flex items-center justify-center rounded-full",
+  "relative w-17 h-17 flex items-center justify-center rounded-full z-3",
   {
     variants: {
-      variant: {
+      status: {
         active:
           "bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 [&_svg]:fill-primary-foreground",
         unreached:
@@ -41,8 +43,15 @@ const variants = cva(
     v-bind="props"
     :as-child="props.asChild"
     :as="props.as"
-    :class="cn(variants({ variant: props.variant }), props.class)"
+    :class="cn(variants({ status: props.status }), props.class)"
   >
-    <component :is="icons[props.variant]" class="w-8 h-8 stroke-3" />
+    <component :is="icons[props.status]" class="w-8 h-8 stroke-3" />
+
+    <donut-chart
+      v-if="props.status === 'active'"
+      :percentage="50"
+      class="absolute w-24 h-24 -z-1 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 [&_circle]:stroke-slate-700"
+      stroke="red-700"
+    />
   </Primitive>
 </template>

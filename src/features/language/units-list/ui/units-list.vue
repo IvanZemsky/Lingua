@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import type { Unit } from "@/entities/language"
+import type { UnitWithProgress } from "@/entities/language"
 import LessonBtn from "./lesson-btn.vue"
 import ListHeader from "./list-header.vue"
 import { RouterLink } from "vue-router"
 import UnitDescCard from "./unit-desc-card.vue"
-import { useUnitDescCard } from "./use-unit-desc-card"
+import { useUnitDescCard } from "../model/use-unit-desc-card"
 import { toRefs } from "vue"
 
 type Props = {
   sectionNumber: number
-  data: Unit[] | null
+  data: UnitWithProgress[] | null
   isFetching: boolean
   error: unknown
 }
@@ -25,6 +25,7 @@ const { targetRef, desc } = useUnitDescCard(data)
   <div class="flex flex-col items-center gap-8">
     <p v-if="isFetching">Loading...</p>
     <p v-if="error">An error occurred</p>
+
     <UnitDescCard
       v-if="data && desc.unitNumber"
       :title="`Section ${sectionNumber}, Unit ${desc.unitNumber}`"
@@ -44,7 +45,7 @@ const { targetRef, desc } = useUnitDescCard(data)
       <div class="flex flex-col items-center gap-6">
         <LessonBtn
           :as="RouterLink"
-          variant="unreached"
+          :status="lesson.status"
           v-for="lesson in unit.lessons"
           :to="`/sections/${unit.sectionNumber}/lessons/${lesson.number}/variants/${lesson.currentVariant}`"
           :key="lesson.number"

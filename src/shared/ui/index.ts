@@ -9,6 +9,7 @@ import CardTitle from "./kit/card/card-title.vue"
 import UiProgress from "./kit/progress/ui-progress.vue"
 import UiInput from "./kit/input/ui-input.vue"
 import UiTextarea from "./kit/textarea/ui-textarea.vue"
+import DonutChart from "./kit/donut-chart.vue"
 
 export {
   UiButton,
@@ -22,4 +23,5 @@ export {
   CardTitle,
   UiInput,
   UiTextarea,
+  DonutChart,
 }
