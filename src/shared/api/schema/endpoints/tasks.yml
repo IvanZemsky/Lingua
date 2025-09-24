@@ -1,0 +1,175 @@
+schemas:
+  Task:
+    type: object
+    oneOf:
+      - $ref: "#/schemas/TaskListenAndWriteAll"
+      - $ref: "#/schemas/TaskTranslateAll"
+      - $ref: "#/schemas/TaskTranslatePart"
+      - $ref: "#/schemas/TaskPlaceInOrder"
+    discriminator:
+      propertyName: type
+      mapping:
+        listen-and-write-all: "#/schemas/TaskListenAndWriteAll"
+        translate-all: "#/schemas/TaskTranslateAll"
+        translate-part: "#/schemas/TaskTranslatePart"
+        place-in-order: "#/schemas/TaskPlaceInOrder"
+
+  TaskBase:
+    type: object
+    required:
+      - number
+      - type
+    properties:
+      number:
+        type: integer
+        description: Number of task
+      type:
+        type: string
+        enum:
+          - listen-and-write-all
+          - translate-all
+          - translate-part
+          - place-in-order
+        description: Type of task
+
+  Word:
+    type: object
+    properties:
+      id:
+        type: string
+      text:
+        type: string
+      translations:
+        type: array
+        items:
+          type: string
+
+  TaskListenAndWriteAll:
+    allOf:
+      - $ref: "#/schemas/TaskBase"
+      - type: object
+        required:
+          - text
+          - translations
+        properties:
+          type:
+            type: string
+            enum: [listen-and-write-all]
+          text:
+            type: array
+            items:
+              $ref: "#/schemas/Word"
+          translations:
+            type: array
+            items:
+              type: string
+
+  TaskTranslateAll:
+    allOf:
+      - $ref: "#/schemas/TaskBase"
+      - type: object
+        required:
+          - text
+          - translations
+        properties:
+          type:
+            type: string
+            enum: [translate-all]
+          text:
+            type: array
+            items:
+              $ref: "#/schemas/Word"
+          translations:
+            type: array
+            items:
+              type: string
+
+  TaskTranslatePart:
+    allOf:
+      - $ref: "#/schemas/TaskBase"
+      - type: object
+        required:
+          - text
+          - translations
+        properties:
+          type:
+            type: string
+            enum: [translate-part]
+          text:
+            type: array
+            items:
+              $ref: "#/schemas/Word"
+          translations:
+            type: array
+            items:
+              type: string
+
+  TaskPlaceInOrder:
+    allOf:
+      - $ref: "#/schemas/TaskBase"
+      - type: object
+        required:
+          - text
+          - words
+        properties:
+          type:
+            type: string
+            enum: [place-in-order]
+          text:
+            type: array
+            items:
+              $ref: "#/schemas/Word"
+          words:
+            type: array
+            items:
+              type: string
+
+  TaskType:
+    type: string
+    enum:
+      - listen-and-write-all
+      - translate-all
+      - translate-part
+      - place-in-order
+
+  TaskList:
+    type: array
+    items:
+      $ref: "#/schemas/Task"
+
+getTasksByVariantNumberInLesson:
+  description: Retrieve a list of tasks
+  parameters:
+    - name: sectionNumber
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Section Number
+    - name: unitNumber
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Unit Number
+    - name: lessonNumber
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Lesson Number
+    - name: variantNumber
+      in: path
+      required: true
+      schema:
+        type: string
+        description: Variant Number
+  responses:
+    "200":
+      description: A list of tasks
+      content:
+        application/json:
+          schema:
+            $ref: "#/schemas/TaskList"
+    "404":
+      $ref: "../shared/responses.yml#/NotFoundError"

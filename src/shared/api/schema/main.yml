@@ -18,6 +18,6 @@ paths:
     get:
       $ref: "./endpoints/units.yml#/getVariantByNumberInLesson"
 
-  # /sections/{sectionNumber}/units/{unitNumber}/lessons/{lessonNumber}/variants/{variantNumber}/tasks:
-  #   get:
-  #     $ref: "./endpoints/tasks.yml#/getTasksByVariantNumber"
+  /sections/{sectionNumber}/units/{unitNumber}/lessons/{lessonNumber}/variants/{variantNumber}/tasks:
+    get:
+      $ref: "./endpoints/tasks.yml#/getTasksByVariantNumberInLesson"

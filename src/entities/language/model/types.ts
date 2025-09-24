@@ -22,5 +22,5 @@ export type Variant = APISchemas["Variant"]
 export type Word = {
   id: string
   text: string
-  transcription: string[]
+  translations: string[]
 }
