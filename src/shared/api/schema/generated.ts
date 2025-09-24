@@ -230,9 +230,9 @@ export interface components {
             type: "listen-and-write-all" | "translate-all" | "translate-part" | "place-in-order";
         };
         Word: {
-            id?: string;
-            text?: string;
-            translations?: string[];
+            id: string;
+            text: string;
+            translations: string[];
         };
         TaskListenAndWriteAll: components["schemas"]["TaskBase"] & {
             /** @enum {string} */

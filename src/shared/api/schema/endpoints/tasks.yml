@@ -34,6 +34,10 @@ schemas:
 
   Word:
     type: object
+    required:
+      - id
+      - text
+      - translations
     properties:
       id:
         type: string

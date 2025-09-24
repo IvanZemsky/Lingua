@@ -19,8 +19,4 @@ export type LessonWithProgress = Lesson & {
 
 export type Variant = APISchemas["Variant"]
 
-export type Word = {
-  id: string
-  text: string
-  translations: string[]
-}
+export type Word = APISchemas["Word"]
