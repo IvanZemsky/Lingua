@@ -36,7 +36,6 @@ schemas:
       - id
       - number
       - totalVariants
-      - currentVariant
     properties:
       id:
         type: string
@@ -48,9 +47,29 @@ schemas:
       totalVariants:
         type: integer
         description: Total number of variants in the lesson
-      currentVariant:
+
+  Variant:
+    type: object
+    required:
+      - id
+      - lessonNumber
+      - number
+    properties:
+      id:
+        type: string
+        # format: uuid
+        description: Unique identifier for the variant
+      number:
         type: integer
-        description: Current variant number
+        description: Variant number
+      lessonNumber:
+        type: integer
+        description: Lesson number of the variant
+  VariantList:
+    type: array
+    items:
+      $ref: "#/schemas/Variant"
+
   UnitList:
     type: array
     items:
@@ -72,5 +91,42 @@ getUnitsBySectionNumber:
         application/json:
           schema:
             $ref: "#/schemas/UnitList"
+    "404":
+      $ref: "../shared/responses.yml#/NotFoundError"
+
+getVariantByNumberInLesson:
+  description: Retrieve a variant
+  parameters:
+    - name: sectionNumber
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Section Number
+    - name: unitNumber
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Unit Number
+    - name: lessonNumber
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Lesson Number
+    - name: variantNumber
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Variant Number
+  responses:
+    "200":
+      description: A variant
+      content:
+        application/json:
+          schema:
+            $ref: "#/schemas/Variant"
     "404":
       $ref: "../shared/responses.yml#/NotFoundError"

@@ -8,8 +8,16 @@ info:
 paths:
   /sections:
     get:
-      $ref: './endpoints/sections.yml#/getAllSections'
+      $ref: "./endpoints/sections.yml#/getAllSections"
 
   /sections/{sectionNumber}/units:
     get:
-      $ref: './endpoints/units.yml#/getUnitsBySectionNumber'
+      $ref: "./endpoints/units.yml#/getUnitsBySectionNumber"
+
+  /sections/{sectionNumber}/units/{unitNumber}/lessons/{lessonNumber}/variants/{variantNumber}:
+    get:
+      $ref: "./endpoints/units.yml#/getVariantByNumberInLesson"
+
+  # /sections/{sectionNumber}/units/{unitNumber}/lessons/{lessonNumber}/variants/{variantNumber}/tasks:
+  #   get:
+  #     $ref: "./endpoints/tasks.yml#/getTasksByVariantNumber"
