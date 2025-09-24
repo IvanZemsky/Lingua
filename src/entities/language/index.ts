@@ -20,3 +20,4 @@ export type {
 
 export { useGetAllSectionsQuery } from "./api/get-all-sections"
 export { useGetUnitsBySectionNumberQuery } from "./api/get-units-by-section-number"
+export { useGetVariantByNumberInLessonQuery } from "./api/get-variant-by-number-in-lesson"

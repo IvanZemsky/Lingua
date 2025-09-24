@@ -49,7 +49,7 @@ const { targetRefs, desc } = useUnitDescCard(data)
           :as="RouterLink"
           :status="lesson.status"
           v-for="lesson in unit.lessons"
-          :to="`/sections/${unit.sectionNumber}/lessons/${lesson.number}/variants/${lesson.currentVariant}`"
+          :to="`/sections/${unit.sectionNumber}/units/${unit.number}/lessons/${lesson.number}/variants/${lesson.currentVariant}`"
           :key="lesson.number"
         />
       </div>

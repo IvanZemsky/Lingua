@@ -53,7 +53,10 @@ schemas:
     required:
       - id
       - lessonNumber
+      - sectionNumber
+      - unitNumber
       - number
+      - tasks
     properties:
       id:
         type: string
@@ -65,6 +68,16 @@ schemas:
       lessonNumber:
         type: integer
         description: Lesson number of the variant
+      sectionNumber:
+        type: integer
+        description: Section number of the variant
+      unitNumber:
+        type: integer
+        description: Unit number of the variant
+      tasks:
+        type: array
+        items:
+          $ref: "./tasks.yml#/schemas/Task"
   VariantList:
     type: array
     items:

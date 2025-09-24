@@ -21,7 +21,7 @@ const router = createRouter({
           component: () => import("@/pages/units-page.vue"),
         },
         {
-          path: "sections/:sectionNumber/lessons/:lessonNumber/variants/:variantNumber",
+          path: "sections/:sectionNumber/units/:unitNumber/lessons/:lessonNumber/variants/:variantNumber",
           name: "lesson",
           component: () => import("@/pages/lesson-page.vue"),
         },

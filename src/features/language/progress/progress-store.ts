@@ -27,7 +27,10 @@ export const useCourseProgressStore = defineStore("course-progress", () => {
       ...unit,
       lessons: unit.lessons.map((lesson) => ({
         ...lesson,
-        currentVariant: progress.value.lesson.variant,
+        currentVariant: getLessonVariant(
+          { unit: unit.number, number: lesson.number },
+          progress.value,
+        ),
         status: getLessonStatus({
           unit: unit.number,
           number: lesson.number,
@@ -74,4 +77,17 @@ function getIsActive(
   const isUnitInProgress = lesson.unit === progress.lesson.unit
   const isLessonInProgress = lesson.number === progress.lesson.number
   return isUnitInProgress && isLessonInProgress
+}
+
+function getLessonVariant(
+  lesson: {
+    unit: number
+    number: number
+  },
+  progress: CourseProgressLS,
+): number {
+  const isLesson =
+    lesson.unit === progress.lesson.unit &&
+    lesson.number === progress.lesson.number
+  return isLesson ? progress.lesson.variant : 1
 }

@@ -32,6 +32,22 @@ schemas:
           - place-in-order
         description: Type of task
 
+  WordWithoutSign:
+    type: object
+    required:
+      - id
+      - text
+      - translations
+    properties:
+      id:
+        type: string
+      text:
+        type: string
+      translations:
+        type: array
+        items:
+          type: string
+
   Word:
     type: object
     required:

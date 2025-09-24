@@ -126,51 +126,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/sections/{sectionNumber}/units/{unitNumber}/lessons/{lessonNumber}/variants/{variantNumber}/tasks": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** @description Retrieve a list of tasks */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description Section Number */
-                    sectionNumber: string;
-                    /** @description Unit Number */
-                    unitNumber: string;
-                    /** @description Lesson Number */
-                    lessonNumber: string;
-                    variantNumber: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description A list of tasks */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["TaskList"];
-                    };
-                };
-                404: components["responses"]["NotFoundError"];
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -211,14 +166,6 @@ export interface components {
         Error: {
             message: string;
             code: string;
-        };
-        Variant: {
-            /** @description Unique identifier for the variant */
-            id: string;
-            /** @description Variant number */
-            number: number;
-            /** @description Lesson number of the variant */
-            lessonNumber: number;
         };
         TaskBase: {
             /** @description Number of task */
@@ -283,7 +230,19 @@ export interface components {
             type: "place-in-order";
         };
         Task: components["schemas"]["TaskListenAndWriteAll"] | components["schemas"]["TaskTranslateAll"] | components["schemas"]["TaskTranslatePart"] | components["schemas"]["TaskPlaceInOrder"];
-        TaskList: components["schemas"]["Task"][];
+        Variant: {
+            /** @description Unique identifier for the variant */
+            id: string;
+            /** @description Variant number */
+            number: number;
+            /** @description Lesson number of the variant */
+            lessonNumber: number;
+            /** @description Section number of the variant */
+            sectionNumber: number;
+            /** @description Unit number of the variant */
+            unitNumber: number;
+            tasks: components["schemas"]["Task"][];
+        };
     };
     responses: {
         /** @description Resource not found */
