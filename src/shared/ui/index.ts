@@ -10,6 +10,10 @@ import UiProgress from "./kit/progress/ui-progress.vue"
 import UiInput from "./kit/input/ui-input.vue"
 import UiTextarea from "./kit/textarea/ui-textarea.vue"
 import DonutChart from "./kit/donut-chart.vue"
+import UiPopover from "./kit/popover/UiPopover.vue"
+import PopoverAnchor from "./kit/popover/PopoverAnchor.vue"
+import PopoverContent from "./kit/popover/PopoverContent.vue"
+import PopoverTrigger from "./kit/popover/PopoverTrigger.vue"
 
 export {
   UiButton,
@@ -24,4 +28,8 @@ export {
   UiInput,
   UiTextarea,
   DonutChart,
+  UiPopover,
+  PopoverAnchor,
+  PopoverContent,
+  PopoverTrigger,
 }

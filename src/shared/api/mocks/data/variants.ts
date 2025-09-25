@@ -27,6 +27,11 @@ export const MOCK_VARIANTS: components["schemas"]["Variant"][] = [
             text: "Mundum",
             translations: ["World"],
           },
+          {
+            id: "4",
+            text: "!",
+            translations: [],
+          }
         ],
         translations: ["Hello World"],
       },

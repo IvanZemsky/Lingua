@@ -48,7 +48,10 @@ export const sectionHandlers = [
           v.number === variantNumber,
       )
       if (!variant) {
-        return HttpResponse.json({ message: "Variant not found" }, { status: 404 })
+        return HttpResponse.json(
+          { message: "Variant not found" },
+          { status: 404 },
+        )
       }
 
       return HttpResponse.json(variant)

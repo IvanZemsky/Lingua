@@ -16,5 +16,5 @@ export function useGetVariantByNumberInLessonQuery({
 }: GetVariantParams) {
   return useFetchClient<Variant>(
     `/sections/${sectionNumber}/units/${unitNumber}/lessons/${lessonNumber}/variants/${variantNumber}`,
-  ).json()
+  ).json<Variant>()
 }

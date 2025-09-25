@@ -6,6 +6,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ["Nunito", "sans-serif"],
+        system: ["system-ui", "sans-serif"],
       },
     },
   },
