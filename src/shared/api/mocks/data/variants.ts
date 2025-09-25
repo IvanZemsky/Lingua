@@ -14,7 +14,7 @@ export const MOCK_VARIANTS: components["schemas"]["Variant"][] = [
         text: [
           {
             id: "1",
-            text: "Salve",
+            text: "Hola",
             translations: ["Hello"],
           },
           {
@@ -24,7 +24,7 @@ export const MOCK_VARIANTS: components["schemas"]["Variant"][] = [
           },
           {
             id: "3",
-            text: "Mundum",
+            text: "Mundo",
             translations: ["World"],
           },
           {
@@ -33,7 +33,7 @@ export const MOCK_VARIANTS: components["schemas"]["Variant"][] = [
             translations: [],
           }
         ],
-        translations: ["Hello World"],
+        translations: ["hello world"],
       },
       {
         number: 2,
@@ -41,26 +41,21 @@ export const MOCK_VARIANTS: components["schemas"]["Variant"][] = [
         text: [
           {
             id: "1",
-            text: "Marcus",
-            translations: ["Marcus, Mark"],
+            text: "Juan",
+            translations: ["Juan"],
           },
           {
             id: "2",
-            text: "vir",
-            translations: ["man"],
+            text: "es",
+            translations: ["is"],
           },
           {
             id: "3",
-            text: "Romanus",
-            translations: ["Roman"],
-          },
-          {
-            id: "4",
-            text: "est",
-            translations: ["is"],
+            text: "Español",
+            translations: ["Spanish"],
           },
         ],
-        translations: ["Marcus is a Roman man", "Mark is a Roman man"],
+        translations: ["juan is spanish"],
       },
     ],
   },

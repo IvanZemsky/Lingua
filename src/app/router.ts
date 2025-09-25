@@ -23,7 +23,7 @@ const router = createRouter({
         {
           path: "sections/:sectionNumber/units/:unitNumber/lessons/:lessonNumber/variants/:variantNumber",
           name: "lesson",
-          component: () => import("@/pages/lesson-page.vue"),
+          component: () => import("@/pages/lesson/lesson-page.vue"),
         },
       ],
     },

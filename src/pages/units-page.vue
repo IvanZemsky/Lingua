@@ -31,7 +31,7 @@ const { listRef } = useScrollToUnit(data, courseProgressStore.progress.lesson.un
 </script>
 
 <template>
-  <div class="relative pt-25">
+  <div class="relative">
     <UnitsList
       ref="listRef"
       :sectionNumber="sectionNumber"

@@ -1,23 +1,24 @@
 <script setup lang="ts">
 import type { Word } from "@/entities/language"
-import {
-  UiPopover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/shared/ui"
+import { UiPopover, PopoverContent, PopoverTrigger } from "@/shared/ui"
 
 type Props = {
   word: Word
 }
 
 defineProps<Props>()
+
+defineEmits<{
+  (e: "click", word: string): void
+}>()
 </script>
 
 <template>
   <UiPopover>
     <PopoverTrigger as-child>
       <span
-        class="inline-block border-b-3 border-gray-200 border-dotted font-semibold text-gray-700 cursor-pointer"
+        @click="$emit('click', word.text)"
+        class="inline-block border-b-3 border-gray-200 border-dotted font-semibold text-gray-700 cursor-pointer hover:text-gray-900"
       >
         {{ word.text }}
       </span>

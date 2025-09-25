@@ -36,8 +36,8 @@ const { targetRefs, desc } = useUnitDescCard(data)
     />
 
     <div
-      class="w-full"
       v-for="(unit, i) in data"
+      :class="`w-full ${i === 0 ? 'pt-26' : ''}`"
       :key="unit.number"
       :data-unit="unit.number"
       ref="targetRefs"

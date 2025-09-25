@@ -6,6 +6,11 @@ type Props = {
 }
 
 defineProps<Props>()
+
+const currentTaskNumber = defineModel("currentTaskNumber", {
+  type: Number,
+  required: true,
+})
 </script>
 
 <template>

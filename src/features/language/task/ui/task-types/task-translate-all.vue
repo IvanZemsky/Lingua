@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import type { TaskTranslateAll } from "@/entities/language"
+import { parsePunctuation, type TaskTranslateAll } from "@/entities/language"
 import TaskWord from "../task-word.vue"
 import { UiTextarea } from "@/shared/ui"
 import { TASK_TYPES_TITLES } from "."
+import { useSpeechStore } from "@/features/language/voiceover"
 
 type Props = {
   data: TaskTranslateAll
@@ -10,24 +11,14 @@ type Props = {
 
 const { data } = defineProps<Props>()
 
-const parsedWords = data.text
-  .map((word, i, array) => {
-    if (word.translations.length === 0) return
+const currentTaskNumber = defineModel("currentTaskNumber", {
+  type: Number,
+  required: true,
+})
 
-    const nextItem = array[i + 1]
-    if (!nextItem) {
-      return word
-    }
+const speech = useSpeechStore()
 
-    const isNotWord = nextItem.translations.length === 0
-    if (isNotWord) {
-      return {
-        ...word,
-        text: word.text + nextItem.text,
-      }
-    }
-  })
-  .filter((w) => w !== undefined)
+const parsedWords = parsePunctuation(data.text)
 </script>
 
 <template>
@@ -35,9 +26,14 @@ const parsedWords = data.text
     <h1 class="font-bold text-[25px]">{{ TASK_TYPES_TITLES[data.type] }}</h1>
 
     <p class="flex flex-wrap gap-1 text-[18px]">
-      <TaskWord v-for="word in parsedWords" :key="word.id" :word="word" />
+      <TaskWord
+        v-for="word in parsedWords"
+        :key="word.id"
+        :word="word"
+        @click="speech.speak(word.text)"
+      />
     </p>
 
-    <UiTextarea placeholder="Translation" class="mt-auto h-30"/>
+    <UiTextarea placeholder="Translation" class="mt-auto h-30 resize-none" />
   </div>
 </template>

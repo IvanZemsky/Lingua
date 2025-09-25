@@ -6,8 +6,9 @@ export type {
   Lesson,
   LessonWithProgress,
   LessonStatus,
-  Word,
 } from "./model/types"
+
+export {type Word, parsePunctuation} from "./model/word"
 
 export type {
   Task,
