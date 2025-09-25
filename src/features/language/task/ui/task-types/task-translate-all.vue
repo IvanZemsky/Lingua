@@ -2,8 +2,8 @@
 import { parsePunctuation, type TaskTranslateAll } from "@/entities/language"
 import TaskWord from "../task-word.vue"
 import { UiTextarea } from "@/shared/ui"
+import { Volume2Icon } from "lucide-vue-next"
 import { TASK_TYPES_TITLES } from "."
-import { useSpeechStore } from "@/features/language/voiceover"
 
 type Props = {
   data: TaskTranslateAll
@@ -11,12 +11,14 @@ type Props = {
 
 const { data } = defineProps<Props>()
 
-const currentTaskNumber = defineModel("currentTaskNumber", {
-  type: Number,
+defineEmits<{
+  (e: "play-audio", text: string): void
+}>()
+
+const answer = defineModel("answer", {
+  type: String,
   required: true,
 })
-
-const speech = useSpeechStore()
 
 const parsedWords = parsePunctuation(data.text)
 </script>
@@ -25,15 +27,27 @@ const parsedWords = parsePunctuation(data.text)
   <div class="flex flex-col gap-4 h-full">
     <h1 class="font-bold text-[25px]">{{ TASK_TYPES_TITLES[data.type] }}</h1>
 
-    <p class="flex flex-wrap gap-1 text-[18px]">
+    <p class="flex flex-wrap items-center gap-1 text-[18px]">
+      <button
+        class="mr-2"
+        @click="
+          $emit('play-audio', parsedWords.map((word) => word.text).join(' '))
+        "
+      >
+        <Volume2Icon class="w-7 h-7"/>
+      </button>
       <TaskWord
         v-for="word in parsedWords"
         :key="word.id"
         :word="word"
-        @click="speech.speak(word.text)"
+        @click="$emit('play-audio', word.text)"
       />
     </p>
 
-    <UiTextarea placeholder="Translation" class="mt-auto h-30 resize-none" />
+    <UiTextarea
+      placeholder="Translation"
+      class="mt-auto h-30 resize-none"
+      v-model="answer"
+    />
   </div>
 </template>

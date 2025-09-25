@@ -7,8 +7,8 @@ type Props = {
 
 defineProps<Props>()
 
-const currentTaskNumber = defineModel("currentTaskNumber", {
-  type: Number,
+const answer = defineModel("answer", {
+  type: String,
   required: true,
 })
 </script>

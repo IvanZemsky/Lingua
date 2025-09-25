@@ -13,17 +13,18 @@ export function parsePunctuation(words: Word[]): Word[] {
       if (word.translations.length === 0) return
 
       const nextItem = array[i + 1]
-      if (!nextItem) {
-        return word
-      }
-
-      const isNotWord = nextItem.translations.length === 0
-      if (isNotWord) {
+      if (nextItem && nextItem.translations.length === 0) {
         return {
           ...word,
           text: word.text + nextItem.text,
         }
       }
+
+      return word
     })
     .filter((w) => w !== undefined)
+}
+
+export function getWordsAsText(words: Word[]): string {
+  return words.map((word) => word.text).join(" ")
 }

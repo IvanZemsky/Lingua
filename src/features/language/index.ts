@@ -7,3 +7,4 @@ export { SectionCard, UnitsList, VariantHeader, TaskLayout }
 export { TASK_TYPES_UI } from "./task/ui/task-types"
 
 export { useScrollToUnit } from "./units-list/model/use-scroll-to-unit"
+export { useSpeechStore } from "./voiceover/voiceover-store"

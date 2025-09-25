@@ -175,6 +175,7 @@ export interface components {
              * @enum {string}
              */
             type: "listen-and-write-all" | "translate-all" | "translate-part" | "place-in-order";
+            results: string[];
         };
         Word: {
             id: string;
@@ -183,9 +184,9 @@ export interface components {
         };
         TaskListenAndWriteAll: components["schemas"]["TaskBase"] & {
             /** @enum {string} */
-            type?: "listen-and-write-all";
+            type: "listen-and-write-all";
             text: components["schemas"]["Word"][];
-            translations: string[];
+            translation: string;
         } & {
             /**
              * @description discriminator enum property added by openapi-typescript
@@ -195,9 +196,9 @@ export interface components {
         };
         TaskTranslateAll: components["schemas"]["TaskBase"] & {
             /** @enum {string} */
-            type?: "translate-all";
+            type: "translate-all";
             text: components["schemas"]["Word"][];
-            translations: string[];
+            translation: string;
         } & {
             /**
              * @description discriminator enum property added by openapi-typescript
@@ -207,9 +208,9 @@ export interface components {
         };
         TaskTranslatePart: components["schemas"]["TaskBase"] & {
             /** @enum {string} */
-            type?: "translate-part";
+            type: "translate-part";
             text: components["schemas"]["Word"][];
-            translations: string[];
+            translation: string;
         } & {
             /**
              * @description discriminator enum property added by openapi-typescript
@@ -219,7 +220,7 @@ export interface components {
         };
         TaskPlaceInOrder: components["schemas"]["TaskBase"] & {
             /** @enum {string} */
-            type?: "place-in-order";
+            type: "place-in-order";
             text: components["schemas"]["Word"][];
             words: string[];
         } & {

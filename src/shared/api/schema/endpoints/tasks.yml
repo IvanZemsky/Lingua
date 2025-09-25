@@ -19,6 +19,7 @@ schemas:
     required:
       - number
       - type
+      - results
     properties:
       number:
         type: integer
@@ -31,6 +32,10 @@ schemas:
           - translate-part
           - place-in-order
         description: Type of task
+      results:
+        type: array
+        items:
+          type: string
 
   WordWithoutSign:
     type: object
@@ -70,7 +75,8 @@ schemas:
       - type: object
         required:
           - text
-          - translations
+          - type
+          - translation
         properties:
           type:
             type: string
@@ -79,10 +85,8 @@ schemas:
             type: array
             items:
               $ref: "#/schemas/Word"
-          translations:
-            type: array
-            items:
-              type: string
+          translation:
+            type: string
 
   TaskTranslateAll:
     allOf:
@@ -90,7 +94,8 @@ schemas:
       - type: object
         required:
           - text
-          - translations
+          - type
+          - translation
         properties:
           type:
             type: string
@@ -99,10 +104,8 @@ schemas:
             type: array
             items:
               $ref: "#/schemas/Word"
-          translations:
-            type: array
-            items:
-              type: string
+          translation:
+            type: string
 
   TaskTranslatePart:
     allOf:
@@ -110,7 +113,8 @@ schemas:
       - type: object
         required:
           - text
-          - translations
+          - translation
+          - type
         properties:
           type:
             type: string
@@ -119,10 +123,8 @@ schemas:
             type: array
             items:
               $ref: "#/schemas/Word"
-          translations:
-            type: array
-            items:
-              type: string
+          translation:
+            type: string
 
   TaskPlaceInOrder:
     allOf:
@@ -130,6 +132,7 @@ schemas:
       - type: object
         required:
           - text
+          - type
           - words
         properties:
           type:
