@@ -174,7 +174,7 @@ export interface components {
              * @description Type of task
              * @enum {string}
              */
-            type: "listen-and-write-all" | "translate-all" | "translate-part" | "place-in-order";
+            type: "listen-and-write-all" | "translate-all" | "write-part" | "listen-and-place-in-order";
             results: string[];
         };
         Word: {
@@ -206,9 +206,9 @@ export interface components {
              */
             type: "translate-all";
         };
-        TaskTranslatePart: components["schemas"]["TaskBase"] & {
+        TaskWritePart: components["schemas"]["TaskBase"] & {
             /** @enum {string} */
-            type: "translate-part";
+            type: "write-part";
             text: components["schemas"]["Word"][];
             translation: string;
         } & {
@@ -216,11 +216,11 @@ export interface components {
              * @description discriminator enum property added by openapi-typescript
              * @enum {string}
              */
-            type: "translate-part";
+            type: "write-part";
         };
-        TaskPlaceInOrder: components["schemas"]["TaskBase"] & {
+        TaskListenAndPlaceInOrder: components["schemas"]["TaskBase"] & {
             /** @enum {string} */
-            type: "place-in-order";
+            type: "listen-and-place-in-order";
             text: components["schemas"]["Word"][];
             words: string[];
         } & {
@@ -228,9 +228,9 @@ export interface components {
              * @description discriminator enum property added by openapi-typescript
              * @enum {string}
              */
-            type: "place-in-order";
+            type: "listen-and-place-in-order";
         };
-        Task: components["schemas"]["TaskListenAndWriteAll"] | components["schemas"]["TaskTranslateAll"] | components["schemas"]["TaskTranslatePart"] | components["schemas"]["TaskPlaceInOrder"];
+        Task: components["schemas"]["TaskListenAndWriteAll"] | components["schemas"]["TaskTranslateAll"] | components["schemas"]["TaskWritePart"] | components["schemas"]["TaskListenAndPlaceInOrder"];
         Variant: {
             /** @description Unique identifier for the variant */
             id: string;

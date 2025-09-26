@@ -1,9 +1,18 @@
 <script setup lang="ts">
-import { useGetVariantByNumberInLessonQuery } from "@/entities/language"
-import { TASK_TYPES_UI, TaskLayout, VariantHeader, useSpeechStore } from "@/features/language"
-import { UiButton } from "@/shared/ui"
+import {
+  useGetVariantByNumberInLessonQuery,
+  needToShowTranslation,
+} from "@/entities/language"
+import {
+  TASK_TYPES_UI,
+  TaskLayout,
+  VariantHeader,
+  TaskBtn,
+  useSpeechStore,
+} from "@/features/language"
 import { computed, ref } from "vue"
 import { useGetPageParams } from "./use-get-page-params"
+import LessonFooter from "./lesson-footer.vue"
 
 const params = useGetPageParams()
 
@@ -13,6 +22,9 @@ const speechStore = useSpeechStore()
 const currentTaskNumber = ref(1)
 
 const answer = ref<string>("")
+const isAnswerCorrect = ref(false)
+const isAnswerChecked = ref(false)
+const answerVariant = computed(getVariant)
 
 const currentTask = computed(() =>
   data.value?.tasks.find((t) => t.number === currentTaskNumber.value),
@@ -25,14 +37,31 @@ function checkAnswer() {
     answer.value.trim().toLowerCase(),
   )
 
-  if (isCorrect) {
-    // show that correct
-    currentTaskNumber.value++
-  } else {
-    // show that incorrect
-    // alert("Incorrect answer, try again.")
-    currentTaskNumber.value++
+  console.log(currentTask.value.results, answer.value)
+
+  isAnswerCorrect.value = isCorrect
+  isAnswerChecked.value = true
+}
+
+function handleTaskBtnClick() {
+  const variant = answerVariant.value
+
+  if (variant === "notChecked") {
+    checkAnswer()
   }
+  if (variant === "correct") {
+    answer.value = ""
+    currentTaskNumber.value++
+    isAnswerChecked.value = false
+  }
+  if (variant === "incorrect") {
+    isAnswerChecked.value = false
+  }
+}
+
+function getVariant() {
+  if (!isAnswerChecked.value) return "notChecked"
+  return isAnswerCorrect.value ? "correct" : "incorrect"
 }
 </script>
 
@@ -56,13 +85,25 @@ function checkAnswer() {
     />
 
     <template #footer>
-      <UiButton
-        size="lg"
-        class="text-xl h-14 font-semibold"
-        @click="checkAnswer"
+      <LessonFooter
+        :isAnswerCorrect="isAnswerCorrect"
+        :isAnswerChecked="isAnswerChecked"
       >
-        Check
-      </UiButton>
+        <template #answer-msg>
+          <p v-if="isAnswerCorrect">
+            Correct <br />
+            <span class="text-[18px]" v-if="needToShowTranslation(currentTask)">
+              Translation: {{ currentTask.translation }}
+            </span>
+          </p>
+          <p v-if="isAnswerChecked && !isAnswerCorrect">
+            Incorrect. Please, try again or skip.
+          </p>
+        </template>
+        <template #task-btn>
+          <TaskBtn :variant="answerVariant" @click="handleTaskBtnClick" />
+        </template>
+      </LessonFooter>
     </template>
   </TaskLayout>
 </template>

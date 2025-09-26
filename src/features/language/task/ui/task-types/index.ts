@@ -7,14 +7,14 @@ import TaskTranslatePart from "./task-translate-part.vue"
 
 export const TASK_TYPES_UI: Record<TaskType, Component> = {
   "listen-and-write-all": TaskListenAndWriteAll,
-  "place-in-order": TaskPlaceInOrder,
+  "listen-and-place-in-order": TaskPlaceInOrder,
   "translate-all": TaskTranslateAll,
-  "translate-part": TaskTranslatePart,
+  "write-part": TaskTranslatePart,
 }
 
 export const TASK_TYPES_TITLES: Record<TaskType, string> = {
   "listen-and-write-all": "Listen and write all",
-  "place-in-order": "Place in order",
+  "listen-and-place-in-order": "Place in order",
   "translate-all": "Translate all",
-  "translate-part": "Translate part",
+  "write-part": "Translate part",
 }

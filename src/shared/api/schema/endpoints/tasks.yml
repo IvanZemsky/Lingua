@@ -4,15 +4,15 @@ schemas:
     oneOf:
       - $ref: "#/schemas/TaskListenAndWriteAll"
       - $ref: "#/schemas/TaskTranslateAll"
-      - $ref: "#/schemas/TaskTranslatePart"
-      - $ref: "#/schemas/TaskPlaceInOrder"
+      - $ref: "#/schemas/TaskWritePart"
+      - $ref: "#/schemas/TaskListenAndPlaceInOrder"
     discriminator:
       propertyName: type
       mapping:
         listen-and-write-all: "#/schemas/TaskListenAndWriteAll"
         translate-all: "#/schemas/TaskTranslateAll"
-        translate-part: "#/schemas/TaskTranslatePart"
-        place-in-order: "#/schemas/TaskPlaceInOrder"
+        write-part: "#/schemas/TaskWritePart"
+        listen-and-place-in-order: "#/schemas/TaskListenAndPlaceInOrder"
 
   TaskBase:
     type: object
@@ -29,8 +29,8 @@ schemas:
         enum:
           - listen-and-write-all
           - translate-all
-          - translate-part
-          - place-in-order
+          - write-part
+          - listen-and-place-in-order
         description: Type of task
       results:
         type: array
@@ -107,7 +107,7 @@ schemas:
           translation:
             type: string
 
-  TaskTranslatePart:
+  TaskWritePart:
     allOf:
       - $ref: "#/schemas/TaskBase"
       - type: object
@@ -118,7 +118,7 @@ schemas:
         properties:
           type:
             type: string
-            enum: [translate-part]
+            enum: [write-part]
           text:
             type: array
             items:
@@ -126,7 +126,7 @@ schemas:
           translation:
             type: string
 
-  TaskPlaceInOrder:
+  TaskListenAndPlaceInOrder:
     allOf:
       - $ref: "#/schemas/TaskBase"
       - type: object
@@ -137,7 +137,7 @@ schemas:
         properties:
           type:
             type: string
-            enum: [place-in-order]
+            enum: [listen-and-place-in-order]
           text:
             type: array
             items:
@@ -152,8 +152,8 @@ schemas:
     enum:
       - listen-and-write-all
       - translate-all
-      - translate-part
-      - place-in-order
+      - write-part
+      - listen-and-place-in-order
 
   TaskList:
     type: array

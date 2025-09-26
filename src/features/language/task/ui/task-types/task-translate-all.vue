@@ -25,7 +25,7 @@ const parsedWords = parsePunctuation(data.text)
 
 <template>
   <div class="flex flex-col gap-4 h-full">
-    <h1 class="font-bold text-[25px]">{{ TASK_TYPES_TITLES[data.type] }}</h1>
+    <h1 class="font-bold text-[25px] font-montserrat">{{ TASK_TYPES_TITLES[data.type] }}</h1>
 
     <p class="flex flex-wrap items-center gap-1 text-[18px]">
       <button
@@ -46,7 +46,7 @@ const parsedWords = parsePunctuation(data.text)
 
     <UiTextarea
       placeholder="Translation"
-      class="mt-auto h-30 resize-none"
+      class="grow-1 h-30 resize-none border-2 border-gray-200"
       v-model="answer"
     />
   </div>

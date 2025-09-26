@@ -39,7 +39,7 @@ export const MOCK_VARIANTS: components["schemas"]["Variant"][] = [
       {
         number: 2,
         type: "listen-and-write-all",
-        results: ["juan is spanish"],
+        results: ["juan es espanol"],
         text: [
           {
             id: "1",
@@ -57,7 +57,7 @@ export const MOCK_VARIANTS: components["schemas"]["Variant"][] = [
             translations: ["Spanish"],
           },
         ],
-        translation: "juan is spanish",
+        translation: "Juan is Spanish",
       },
     ],
   },

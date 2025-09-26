@@ -1,1 +1,1 @@
-export { useCourseProgressStore } from "./progress-store"
+export { useCourseProgressStore } from "./store"

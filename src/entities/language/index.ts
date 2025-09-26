@@ -13,11 +13,12 @@ export { type Word, parsePunctuation, getWordsAsText } from "./model/word"
 export type {
   Task,
   TaskType,
-  TaskPlaceInOrder,
+  TaskListenAndPlaceInOrder,
   TaskListenAndWriteAll,
   TaskTranslateAll,
-  TaskTranslatePart,
+  TaskWritePart,
 } from "./model/task"
+export {needToShowTranslation} from "./model/task"
 
 export { useGetAllSectionsQuery } from "./api/get-all-sections"
 export { useGetUnitsBySectionNumberQuery } from "./api/get-units-by-section-number"

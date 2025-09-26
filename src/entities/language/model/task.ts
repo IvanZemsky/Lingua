@@ -6,8 +6,15 @@ export type TaskListenAndWriteAll = APISchemas["TaskListenAndWriteAll"]
 
 export type TaskTranslateAll = APISchemas["TaskTranslateAll"]
 
-export type TaskTranslatePart = APISchemas["TaskTranslatePart"]
+export type TaskWritePart = APISchemas["TaskWritePart"]
 
-export type TaskPlaceInOrder = APISchemas["TaskPlaceInOrder"]
+export type TaskListenAndPlaceInOrder = APISchemas["TaskListenAndPlaceInOrder"]
 
-export type TaskType = APISchemas["Task"]["type"]
+export type TaskType = Task["type"]
+
+
+export function needToShowTranslation(
+  task: Task,
+): task is TaskListenAndWriteAll | TaskWritePart {
+  return task.type !== "translate-all"
+}

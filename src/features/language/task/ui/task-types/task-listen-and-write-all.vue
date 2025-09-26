@@ -6,7 +6,8 @@ import {
 } from "@/entities/language"
 import { TASK_TYPES_TITLES } from "./index"
 import { UiTextarea } from "@/shared/ui"
-import VoiceoverBtn from "../voiceover-btn.vue"
+import VoiceoverBlock from "../voiceover/voiceover-block.vue"
+import type { UseSpeechSynthesisOptions } from "@vueuse/core"
 
 type Props = {
   data: TaskListenAndWriteAll
@@ -15,7 +16,7 @@ type Props = {
 const { data } = defineProps<Props>()
 
 defineEmits<{
-  (e: "play-audio", text: string): void
+  (e: "play-audio", text: string, options?: UseSpeechSynthesisOptions): void
 }>()
 
 const answer = defineModel("answer", {
@@ -28,15 +29,17 @@ const text = getWordsAsText(parsePunctuation(data.text))
 
 <template>
   <div class="flex flex-col gap-4 h-full">
-    <h1 class="font-bold text-[25px]">{{ TASK_TYPES_TITLES[data.type] }}</h1>
+    <h1 class="font-bold text-[25px] font-montserrat">
+      {{ TASK_TYPES_TITLES[data.type] }}
+    </h1>
 
-    <div class="flex items-senter gap-4 p-4">
-      <VoiceoverBtn @play-audio="$emit('play-audio', text)" />
+    <div class="flex items-senter gap-4">
+      <VoiceoverBlock @play-audio="$emit('play-audio', text)" :text="text" />
     </div>
 
     <UiTextarea
       placeholder="Text"
-      class="mt-auto h-30 resize-none"
+      class="grow-2 h-30 resize-none border-2 border-gray-200"
       v-model="answer"
     />
   </div>
