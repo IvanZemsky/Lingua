@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { TaskTranslateAll } from "@/entities/language"
+import type { TaskWritePart } from "@/entities/language"
 
 type Props = {
-  data: TaskTranslateAll
+  data: TaskWritePart
 }
 
 defineProps<Props>()

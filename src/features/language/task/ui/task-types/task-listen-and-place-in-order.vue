@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { TaskPlaceInOrder } from "@/entities/language"
+import type { TaskListenAndPlaceInOrder } from "@/entities/language"
 
 type Props = {
-  data: TaskPlaceInOrder
+  data: TaskListenAndPlaceInOrder
 }
 
 defineProps<Props>()
