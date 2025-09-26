@@ -9,8 +9,9 @@ import {
   VariantHeader,
   TaskBtn,
   useSpeechStore,
+  useAnswer,
+  useTask,
 } from "@/features/language"
-import { computed, ref } from "vue"
 import { useGetPageParams } from "./use-get-page-params"
 import LessonFooter from "./lesson-footer.vue"
 
@@ -19,89 +20,55 @@ const params = useGetPageParams()
 const { data, isFetching, error } = useGetVariantByNumberInLessonQuery(params)
 const speechStore = useSpeechStore()
 
-const currentTaskNumber = ref(1)
-
-const answer = ref<string>("")
-const isAnswerCorrect = ref(false)
-const isAnswerChecked = ref(false)
-const answerVariant = computed(getVariant)
-
-const currentTask = computed(() =>
-  data.value?.tasks.find((t) => t.number === currentTaskNumber.value),
-)
-
-function checkAnswer() {
-  if (!currentTask.value) return
-
-  const isCorrect = currentTask.value.results.includes(
-    answer.value.trim().toLowerCase(),
-  )
-
-  console.log(currentTask.value.results, answer.value)
-
-  isAnswerCorrect.value = isCorrect
-  isAnswerChecked.value = true
-}
-
-function handleTaskBtnClick() {
-  const variant = answerVariant.value
-
-  if (variant === "notChecked") {
-    checkAnswer()
-  }
-  if (variant === "correct") {
-    answer.value = ""
-    currentTaskNumber.value++
-    isAnswerChecked.value = false
-  }
-  if (variant === "incorrect") {
-    isAnswerChecked.value = false
-  }
-}
-
-function getVariant() {
-  if (!isAnswerChecked.value) return "notChecked"
-  return isAnswerCorrect.value ? "correct" : "incorrect"
-}
+const answer = useAnswer()
+const task = useTask(data, answer)
 </script>
 
 <template>
   <p v-if="isFetching">Loading...</p>
   <p v-if="error">An error occurred</p>
 
-  <TaskLayout v-if="data && currentTask">
+  <TaskLayout v-if="data && task.currentTask.value">
     <template #header>
       <VariantHeader
         :totalTasks="data.tasks.length"
-        :currentTaskNumber="currentTaskNumber"
+        :currentTaskNumber="task.currentTaskNumber.value"
       />
     </template>
 
     <component
-      :is="TASK_TYPES_UI[currentTask.type]"
-      :data="currentTask"
-      v-model:answer="answer"
+      :is="TASK_TYPES_UI[task.currentTask.value.type]"
+      :data="task.currentTask.value"
+      v-model:answer="answer.answerValue.value"
       @play-audio="speechStore.speak"
     />
 
     <template #footer>
       <LessonFooter
-        :isAnswerCorrect="isAnswerCorrect"
-        :isAnswerChecked="isAnswerChecked"
+        :isAnswerCorrect="answer.isCorrect.value"
+        :isAnswerChecked="answer.isChecked.value"
       >
         <template #answer-msg>
-          <p v-if="isAnswerCorrect">
+          <p v-if="answer.isCorrect.value">
             Correct <br />
-            <span class="text-[18px]" v-if="needToShowTranslation(currentTask)">
-              Translation: {{ currentTask.translation }}
+            <span
+              class="text-[18px]"
+              v-if="needToShowTranslation(task.currentTask.value)"
+            >
+              Translation: {{ task.currentTask.value.translation }}
             </span>
           </p>
-          <p v-if="isAnswerChecked && !isAnswerCorrect">
+          <p
+            v-if="answer.isChecked.value && !answer.isCorrect.value"
+          >
             Incorrect. Please, try again or skip.
           </p>
         </template>
         <template #task-btn>
-          <TaskBtn :variant="answerVariant" @click="handleTaskBtnClick" />
+          <TaskBtn
+            :variant="answer.variant.value"
+            @click="task.handleBtnClick"
+          />
         </template>
       </LessonFooter>
     </template>

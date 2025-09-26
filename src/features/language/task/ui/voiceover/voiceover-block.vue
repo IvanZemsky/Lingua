@@ -7,14 +7,16 @@ const { text } = defineProps<{
   text: string
 }>()
 
-const { speak } = useSpeechStore()
+const store = useSpeechStore()
+
+
 
 const slowText = text.split(" ").join("... ")
 </script>
 
 <template>
   <div class="flex items-center gap-4">
-    <VoiceoverBtn @play-audio="speak(text)" />
-    <SlowVoiceoverBtn @play-audio="speak(slowText, { rate: 0.6 })" />
+    <VoiceoverBtn :is-playing="store.isPlaying" @play-audio="store.speak(text)" />
+    <SlowVoiceoverBtn @play-audio="store.speak(slowText, { rate: 0.6 })" />
   </div>
 </template>
