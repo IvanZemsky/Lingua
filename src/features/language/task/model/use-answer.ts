@@ -1,7 +1,7 @@
-import { ref, computed } from "vue"
+import { ref, computed, type UnwrapRef } from "vue"
 
 export function useAnswer() {
-  const answerValue = ref<string>("")
+  const answerValue = ref("")
   const isCorrect = ref(false)
   const isChecked = ref(false)
   const variant = computed(getVariant)
@@ -36,11 +36,11 @@ export function useAnswer() {
     answerValue,
     isCorrect,
     isChecked,
-   variant,
+    variant,
     checkAnswer,
     handleCorrect,
     handleIncorrect,
   }
 }
 
-export type UseAnswerReturn = ReturnType<typeof useAnswer>
+export type AnswerModel = UnwrapRef<ReturnType<typeof useAnswer>>

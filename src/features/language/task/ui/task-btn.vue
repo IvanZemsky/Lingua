@@ -4,6 +4,7 @@ import { cva } from "class-variance-authority"
 
 const { variant = "notChecked" } = defineProps<{
   variant: "correct" | "incorrect" | "notChecked"
+  disabled?: boolean
 }>()
 
 defineEmits<{
@@ -35,6 +36,7 @@ const buttonText = {
     size="lg"
     :class="buttonVariants({ variant })"
     @click="$emit('click')"
+    :disabled="disabled"
   >
     {{ buttonText[variant] }}
   </UiButton>
