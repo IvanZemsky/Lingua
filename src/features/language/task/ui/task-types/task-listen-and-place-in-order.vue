@@ -2,13 +2,11 @@
 import {
   getWordsAsText,
   parsePunctuation,
-  type WordBase,
   type TaskListenAndPlaceInOrder,
 } from "@/entities/language"
 import { TASK_TYPES_TITLES } from "./index"
 import VoiceoverBlock from "../voiceover/voiceover-block.vue"
-import { UiButton } from "@/shared/ui"
-import { computed, ref } from "vue"
+import TaskSelectWords from "../task-select-words.vue"
 
 type Props = {
   data: TaskListenAndPlaceInOrder
@@ -20,30 +18,9 @@ defineEmits<{
 
 const { data } = defineProps<Props>()
 
-const answer = defineModel("answer", {
-  type: String,
-  required: true,
-})
+const answer = defineModel<string>("answer", { required: true })
 
 const text = getWordsAsText(parsePunctuation(data.text))
-
-const wordsToSelect = ref<WordBase[]>(data.text)
-
-const selectedWords = computed(() =>
-  answer.value.split(" ").filter((w) => w.length > 0),
-)
-
-function selectWord(word: WordBase) {
-  answer.value += ` ${word.text}`
-  wordsToSelect.value = wordsToSelect.value.filter((w) => w.id !== word.id)
-}
-
-function deselectWord(text: string) {
-  const word = data.text.find((w) => w.text === text)
-  if (!word) return
-  answer.value = answer.value.replace(` ${text}`, "")
-  wordsToSelect.value.push(word)
-}
 </script>
 
 <template>
@@ -56,30 +33,6 @@ function deselectWord(text: string) {
       <VoiceoverBlock @play-audio="$emit('play-audio', text)" :text="text" />
     </div>
 
-    <div class="grow-1 border-2 border-2-gray-300 p-2 rounded-2xl">
-      <div class="flex flex-wrap gap-2 justify-center">
-        <UiButton
-          v-for="(word, i) in selectedWords"
-          :key="i"
-          variant="secondary"
-          @click="deselectWord(word)"
-        >
-          {{ word }}
-        </UiButton>
-      </div>
-    </div>
-
-    <div class="border-2 border-2-gray-300 p-2 rounded-2xl min-h-[56px]">
-      <div class="flex flex-wrap gap-2 justify-center">
-        <UiButton
-          v-for="word in wordsToSelect"
-          :key="word.id"
-          variant="secondary"
-          @click="selectWord(word)"
-        >
-          {{ word.text }}
-        </UiButton>
-      </div>
-    </div>
+    <TaskSelectWords v-model="answer" :text="data.text" />
   </div>
 </template>
