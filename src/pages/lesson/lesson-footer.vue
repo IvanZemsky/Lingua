@@ -2,10 +2,14 @@
 import { needToShowTranslation, type Task } from "@/entities/language"
 import { AnswerMsg } from "@/features/language"
 
-const { isAnswerCorrect, isAnswerChecked } = defineProps<{
+defineProps<{
   isAnswerCorrect: boolean
   isAnswerChecked: boolean
   currentTask: Task
+}>()
+
+defineEmits<{
+  (e: "skip"): void
 }>()
 </script>
 
@@ -20,7 +24,8 @@ const { isAnswerCorrect, isAnswerChecked } = defineProps<{
       </span>
     </p>
     <p v-if="isAnswerChecked && !isAnswerCorrect">
-      Incorrect. Please, try again or skip.
+      Incorrect. Please, try again or
+      <span class="underline" @click="$emit('skip')">skip</span>.
     </p>
   </AnswerMsg>
 </template>

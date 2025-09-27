@@ -8,10 +8,14 @@ import {
   useSpeechStore,
   useAnswer,
   useTask,
+  useResult,
+  LessonEndScreen,
 } from "@/features/language"
+import { UiButton } from "@/shared/ui"
 import { useGetPageParams } from "./use-get-page-params"
 import LessonFooter from "./lesson-footer.vue"
-import { reactive, watch } from "vue"
+import { reactive } from "vue"
+import { RouterLink } from "vue-router"
 
 const params = useGetPageParams()
 
@@ -19,41 +23,38 @@ const { data, isFetching, error } = useGetVariantByNumberInLessonQuery(params)
 const speechStore = useSpeechStore()
 
 const answer = reactive(useAnswer())
-const task = reactive(useTask(data, answer))
-
-watch(
-  () => answer.answerValue,
-  () => {
-    console.log(answer.answerValue)
-    console.log(task.currentTask?.results)
-  },
-)
+const result = reactive(useResult())
+const task = reactive(useTask(data, answer, result))
 </script>
 
 <template>
   <p v-if="isFetching">Loading...</p>
   <p v-if="error">An error occurred</p>
 
-  <TaskLayout v-if="data && task.currentTask">
+  <TaskLayout v-if="data">
     <template #header>
       <VariantHeader
-        :totalTasks="data.tasks.length"
-        :currentTaskNumber="task.currentTaskNumber"
+        :total-tasks="data.tasks.length"
+        :current-task-number="task.currentTaskNumber"
       />
     </template>
 
     <component
+      v-if="task.state === 'in-progress' && task.currentTask"
+      v-model:answer="answer.answerValue"
       :is="TASK_TYPES_UI[task.currentTask.type]"
       :data="task.currentTask"
-      v-model:answer="answer.answerValue"
       @play-audio="speechStore.speak"
     />
+    <LessonEndScreen v-else :result="result.result" />
 
     <template #footer>
       <LessonFooter
-        :currentTask="task.currentTask"
-        :isAnswerCorrect="answer.isCorrect"
-        :isAnswerChecked="answer.isChecked"
+        v-if="task.currentTask && task.state === 'in-progress'"
+        :current-task="task.currentTask"
+        :is-answer-correct="answer.isCorrect"
+        :is-answer-checked="answer.isChecked"
+        @skip="task.skip"
       >
         <template #task-btn>
           <TaskBtn
@@ -63,6 +64,14 @@ watch(
           />
         </template>
       </LessonFooter>
+      <UiButton
+        v-if="task.state === 'finished'"
+        :as="RouterLink"
+        :to="`/sections/${params.sectionNumber}`"
+        class="w-full text-xl h-14 font-semibold uppercase"
+      >
+        Continue
+      </UiButton>
     </template>
   </TaskLayout>
 </template>
