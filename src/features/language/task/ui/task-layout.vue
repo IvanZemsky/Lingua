@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-col gap-5 h-full pt-5">
+  <div class="flex flex-col gap-5 grow-1 pt-5">
     <slot name="header" />
 
-    <div class="grow-1">
+    <div class="flex flex-col grow-1">
       <slot />
     </div>
 

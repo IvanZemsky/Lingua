@@ -10,11 +10,14 @@ import DonutChart from "@/shared/ui/kit/donut-chart.vue"
 type Props = PrimitiveProps & {
   status: "completed" | "unreached" | "active"
   class?: HTMLAttributes["class"]
+  percentage: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
   as: "button",
 })
+
+console.log(props.percentage)
 
 const icons = {
   completed: Check,
@@ -49,7 +52,7 @@ const variants = cva(
 
     <donut-chart
       v-if="props.status === 'active'"
-      :percentage="50"
+      :percentage="percentage"
       class="absolute w-24 h-24 -z-1 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 [&_circle]:stroke-slate-700"
       stroke="red-700"
     />

@@ -19,6 +19,7 @@ const { data, isFetching, error } = useGetUnitsBySectionNumberQuery<
 >(sectionNumber, {
   afterFetch({ data }) {
     if (data) {
+      courseProgressStore.units = data
       return {
         data: courseProgressStore.convertUnitToUnitWithProgress(data),
       }

@@ -40,7 +40,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="flex flex-col gap-4 h-full">
+  <div class="flex flex-col gap-4 grow-1">
     <h1 class="font-bold text-[25px] font-montserrat">
       {{ TASK_TYPES_TITLES[data.type] }}
     </h1>

@@ -1,6 +1,7 @@
 import type { LessonStatus, Unit, UnitWithProgress } from "@/entities/language"
 import { useLocalStorage } from "@vueuse/core"
 import { defineStore } from "pinia"
+import { ref } from "vue"
 
 type CourseProgressLS = {
   section: number
@@ -22,6 +23,8 @@ export const useCourseProgressStore = defineStore("course-progress", () => {
     initialProgress,
   )
 
+  const units = ref<Unit[]>([])
+
   function convertUnitToUnitWithProgress(data: Unit[]): UnitWithProgress[] {
     return data.map((unit) => ({
       ...unit,
@@ -39,6 +42,34 @@ export const useCourseProgressStore = defineStore("course-progress", () => {
     }))
   }
 
+  function updateProgress() {
+    const { unit, number, variant } = progress.value.lesson
+    const currentUnit = units.value.find((u) => u.number === unit)
+    if (!currentUnit) return
+
+    const currentLesson = currentUnit.lessons.find((l) => l.number === number)
+    if (!currentLesson) return
+
+    if (variant + 1 < currentLesson.totalVariants) {
+      progress.value.lesson.variant++
+      return
+    }
+
+    const nextLesson = currentUnit.lessons.find((l) => l.number === number + 1)
+    if (nextLesson) {
+      progress.value.lesson = { unit, number: number + 1, variant: 0 }
+      return
+    }
+
+    const nextUnit = units.value.find((u) => u.number === unit + 1)
+    if (nextUnit) {
+      progress.value.lesson = { unit: unit + 1, number: 1, variant: 0 }
+      return
+    }
+
+    console.log("Курс завершён 🎉")
+  }
+
   function getLessonStatus(lesson: {
     unit: number
     number: number
@@ -49,7 +80,7 @@ export const useCourseProgressStore = defineStore("course-progress", () => {
     return "unreached"
   }
 
-  return { progress, convertUnitToUnitWithProgress }
+  return { progress, units, convertUnitToUnitWithProgress, updateProgress }
 })
 
 function getIsCompleted(

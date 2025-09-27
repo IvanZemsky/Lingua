@@ -2,7 +2,7 @@ import type { components } from "../../schema/generated"
 
 export const MOCK_VARIANTS: components["schemas"]["Variant"][] = [
   {
-    id: "section-1-unit-1-lesson-1variant-1",
+    id: "section-1-unit-1-lesson-1-variant-1",
     number: 1,
     sectionNumber: 1,
     unitNumber: 1,

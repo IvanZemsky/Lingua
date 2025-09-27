@@ -6,6 +6,7 @@ import { RouterLink } from "vue-router"
 import UnitDescCard from "./unit-desc-card.vue"
 import { useUnitDescCard } from "../model/use-unit-desc-card"
 import { ref, toRefs } from "vue"
+import { useCourseProgressStore } from "../../model/progress-store"
 
 type Props = {
   sectionNumber: number
@@ -21,6 +22,7 @@ const root = ref<HTMLDivElement | null>(null)
 defineExpose({ root })
 
 const { targetRefs, desc } = useUnitDescCard(data)
+const progress = useCourseProgressStore()
 </script>
 
 <template>
@@ -37,7 +39,7 @@ const { targetRefs, desc } = useUnitDescCard(data)
 
     <div
       v-for="(unit, i) in data"
-      :class="`w-full ${i === 0 ? 'pt-26' : ''}`"
+      :class="['w-full', { 'pt-25': i === 0 }]"
       :key="unit.number"
       :data-unit="unit.number"
       ref="targetRefs"
@@ -51,6 +53,10 @@ const { targetRefs, desc } = useUnitDescCard(data)
           v-for="lesson in unit.lessons"
           :to="`/sections/${unit.sectionNumber}/units/${unit.number}/lessons/${lesson.number}/variants/${lesson.currentVariant}`"
           :key="lesson.number"
+          :percentage="
+            ((progress.progress.lesson.variant - 1) / lesson.totalVariants) *
+            100
+          "
         />
       </div>
     </div>

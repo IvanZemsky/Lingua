@@ -2,6 +2,7 @@ import type { Variant } from "@/entities/language"
 import { computed, ref, type ShallowRef } from "vue"
 import type { AnswerModel } from "./use-answer"
 import type { ResultModel } from "../../result/use-result"
+import { useCourseProgressStore } from "../../model/progress-store"
 
 const FIRST_TASK_NUMBER: number = 1
 
@@ -12,6 +13,7 @@ export function useTask(
   answer: AnswerModel,
   result: ResultModel,
 ) {
+  const progress = useCourseProgressStore()
   const state = ref<LessonState>("in-progress")
   const currentTaskNumber = ref(FIRST_TASK_NUMBER)
 
@@ -31,6 +33,8 @@ export function useTask(
 
       if (endTaskNumber.value === currentTaskNumber.value) {
         state.value = "finished"
+        progress.updateProgress()
+        return
       }
 
       currentTaskNumber.value++
