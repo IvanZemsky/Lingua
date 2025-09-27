@@ -8,7 +8,8 @@ export { SectionCard, UnitsList, VariantHeader, TaskLayout, AnswerMsg, TaskBtn }
 export { TASK_TYPES_UI } from "./task/ui/task-types"
 
 export { useScrollToUnit } from "./units-list/model/use-scroll-to-unit"
-export { useSpeechStore } from "./voiceover/store"
+export { useSpeechStore } from "./model/speech-store"
+export { useCourseProgressStore } from "./model/progress-store"
 
-export {useAnswer} from "./task/model/use-answer"
-export {useTask} from "./task/model/use-task"
+export { useAnswer } from "./task/model/use-answer"
+export { useTask } from "./task/model/use-task"

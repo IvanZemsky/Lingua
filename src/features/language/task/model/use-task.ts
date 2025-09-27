@@ -2,8 +2,10 @@ import type { Variant } from "@/entities/language"
 import { computed, ref, type ShallowRef } from "vue"
 import type { AnswerModel } from "./use-answer"
 
+const FIRST_TASK_NUMBER = 1
+
 export function useTask(data: ShallowRef<Variant | null>, answer: AnswerModel) {
-  const currentTaskNumber = ref(1)
+  const currentTaskNumber = ref(FIRST_TASK_NUMBER)
 
   const currentTask = computed(() =>
     data.value?.tasks.find((t) => t.number === currentTaskNumber.value),
@@ -20,7 +22,6 @@ export function useTask(data: ShallowRef<Variant | null>, answer: AnswerModel) {
 
   function handleBtnClick() {
     const variant = answer.variant
-
     variantClickCallbacks[variant]()
   }
 

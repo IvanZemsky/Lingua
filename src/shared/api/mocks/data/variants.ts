@@ -59,6 +59,41 @@ export const MOCK_VARIANTS: components["schemas"]["Variant"][] = [
         ],
         translation: "Juan is Spanish",
       },
+      {
+        number: 3,
+        type: "write-part",
+        results: ["juan es de espana"],
+        text: [
+          {
+            id: "1",
+            text: "Juan",
+            translations: ["Juan"],
+          },
+          {
+            id: "2",
+            text: "es",
+            input: true,
+            translations: ["is"],
+          },
+          {
+            id: "3",
+            text: "de",
+            translations: ["from"],
+          },
+          {
+            id: "4",
+            text: "Espana",
+            input: true,
+            translations: ["Spain"],
+          },
+          {
+            id: "5",
+            text: ".",
+            translations: [],
+          }
+        ],
+        translation: "Juan is from Spain",
+      }
     ],
   },
 ]

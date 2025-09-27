@@ -206,10 +206,16 @@ export interface components {
              */
             type: "translate-all";
         };
+        WordInput: {
+            id: string;
+            text: string;
+            input: boolean;
+            translations: string[];
+        };
         TaskWritePart: components["schemas"]["TaskBase"] & {
             /** @enum {string} */
             type: "write-part";
-            text: components["schemas"]["Word"][];
+            text: (components["schemas"]["Word"] | components["schemas"]["WordInput"])[];
             translation: string;
         } & {
             /**

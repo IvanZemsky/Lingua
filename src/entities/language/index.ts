@@ -8,7 +8,12 @@ export type {
   LessonStatus,
 } from "./model/types"
 
-export { type Word, parsePunctuation, getWordsAsText } from "./model/word"
+export {
+  type Word,
+  parsePunctuation,
+  getWordsAsText,
+  isWordInput,
+} from "./model/word"
 
 export type {
   Task,
@@ -18,7 +23,7 @@ export type {
   TaskTranslateAll,
   TaskWritePart,
 } from "./model/task"
-export {needToShowTranslation} from "./model/task"
+export { needToShowTranslation } from "./model/task"
 
 export { useGetAllSectionsQuery } from "./api/get-all-sections"
 export { useGetUnitsBySectionNumberQuery } from "./api/get-units-by-section-number"

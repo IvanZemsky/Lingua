@@ -16,5 +16,5 @@ export const TASK_TYPES_TITLES: Record<TaskType, string> = {
   "listen-and-write-all": "Listen and write all",
   "listen-and-place-in-order": "Place in order",
   "translate-all": "Translate all",
-  "write-part": "Write part",
+  "write-part": "Fill in the gaps in the text",
 }

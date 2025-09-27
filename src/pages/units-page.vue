@@ -6,7 +6,7 @@ import {
 } from "@/entities/language"
 import { useRoute } from "vue-router"
 import { UnitsList, useScrollToUnit } from "@/features/language"
-import { useCourseProgressStore } from "@/features/language/progress"
+import { useCourseProgressStore } from "@/features/language"
 
 const route = useRoute()
 const sectionNumber = parseInt(route.params.sectionNumber as string)
@@ -27,7 +27,10 @@ const { data, isFetching, error } = useGetUnitsBySectionNumberQuery<
   },
 })
 
-const { listRef } = useScrollToUnit(data, courseProgressStore.progress.lesson.unit)
+const { listRef } = useScrollToUnit(
+  data,
+  courseProgressStore.progress.lesson.unit,
+)
 </script>
 
 <template>

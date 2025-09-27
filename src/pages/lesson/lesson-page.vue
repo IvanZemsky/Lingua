@@ -11,7 +11,7 @@ import {
 } from "@/features/language"
 import { useGetPageParams } from "./use-get-page-params"
 import LessonFooter from "./lesson-footer.vue"
-import { reactive } from "vue"
+import { reactive, watch } from "vue"
 
 const params = useGetPageParams()
 
@@ -20,6 +20,14 @@ const speechStore = useSpeechStore()
 
 const answer = reactive(useAnswer())
 const task = reactive(useTask(data, answer))
+
+watch(
+  () => answer.answerValue,
+  () => {
+    console.log(answer.answerValue)
+    console.log(task.currentTask?.results)
+  },
+)
 </script>
 
 <template>

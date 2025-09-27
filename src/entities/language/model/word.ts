@@ -1,6 +1,10 @@
 import type { APISchemas } from "@/shared/api"
 
-export type Word = APISchemas["Word"]
+export type Word = WordBase | WordInput
+
+export type WordBase = APISchemas["Word"]
+
+export type WordInput = APISchemas["WordInput"]
 
 /**
  * @description Parse words that have no translation.
@@ -27,4 +31,8 @@ export function parsePunctuation(words: Word[]): Word[] {
 
 export function getWordsAsText(words: Word[]): string {
   return words.map((word) => word.text).join(" ")
+}
+
+export function isWordInput(word: Word): word is WordInput {
+  return word.hasOwnProperty("input")
 }

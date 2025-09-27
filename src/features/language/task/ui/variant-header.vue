@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { UiProgress } from "@/shared/ui"
-import { X } from "lucide-vue-next"
+import { XIcon } from "lucide-vue-next"
 import { computed, toRefs } from "vue"
-import { useCourseProgressStore } from "../../progress"
+import { useCourseProgressStore } from "../../model/progress-store"
 
 type Props = {
   totalTasks: number
@@ -21,7 +21,7 @@ const { progress } = toRefs(useCourseProgressStore())
 <template>
   <div class="flex items-center gap-4">
     <RouterLink :to="`/sections/${progress.section}`">
-      <X />
+      <XIcon />
     </RouterLink>
     <UiProgress class="h-4" v-model="variantProgress" />
   </div>

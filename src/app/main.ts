@@ -7,7 +7,7 @@ import "./styles/index.css"
 import App from "./app.vue"
 import router from "./router"
 import { enableMocking } from "@/shared/api"
-import { useCourseProgressStore } from "@/features/language/progress"
+import { useCourseProgressStore } from "@/features/language"
 
 enableMocking().then(() => {
   const app = createApp(App)
