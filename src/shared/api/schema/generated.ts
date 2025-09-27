@@ -228,7 +228,7 @@ export interface components {
             /** @enum {string} */
             type: "listen-and-place-in-order";
             text: components["schemas"]["Word"][];
-            words: string[];
+            translation: string;
         } & {
             /**
              * @description discriminator enum property added by openapi-typescript

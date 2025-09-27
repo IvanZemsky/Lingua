@@ -32,7 +32,7 @@ export const MOCK_VARIANTS: components["schemas"]["Variant"][] = [
             id: "4",
             text: "!",
             translations: [],
-          }
+          },
         ],
         translation: "hello world",
       },
@@ -90,10 +90,38 @@ export const MOCK_VARIANTS: components["schemas"]["Variant"][] = [
             id: "5",
             text: ".",
             translations: [],
-          }
+          },
         ],
         translation: "Juan is from Spain",
-      }
+      },
+      {
+        number: 4,
+        type: "listen-and-place-in-order",
+        results: ["juan es de espana"],
+        text: [
+          {
+            id: "1",
+            text: "Juan",
+            translations: ["Juan"],
+          },
+          {
+            id: "2",
+            text: "es",
+            translations: ["is"],
+          },
+          {
+            id: "3",
+            text: "de",
+            translations: ["from"],
+          },
+          {
+            id: "4",
+            text: "Espana",
+            translations: ["Spain"],
+          },
+        ],
+        translation: "Juan is from Spain",
+      },
     ],
   },
 ]

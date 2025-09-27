@@ -2,7 +2,7 @@ import type { Variant } from "@/entities/language"
 import { computed, ref, type ShallowRef } from "vue"
 import type { AnswerModel } from "./use-answer"
 
-const FIRST_TASK_NUMBER = 1
+const FIRST_TASK_NUMBER = 4
 
 export function useTask(data: ShallowRef<Variant | null>, answer: AnswerModel) {
   const currentTaskNumber = ref(FIRST_TASK_NUMBER)

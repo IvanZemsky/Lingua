@@ -10,6 +10,8 @@ export type {
 
 export {
   type Word,
+  type WordBase,
+  type WordInput,
   parsePunctuation,
   getWordsAsText,
   isWordInput,

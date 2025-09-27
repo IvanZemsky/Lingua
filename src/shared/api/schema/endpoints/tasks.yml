@@ -154,7 +154,7 @@ schemas:
         required:
           - text
           - type
-          - words
+          - translation
         properties:
           type:
             type: string
@@ -163,10 +163,8 @@ schemas:
             type: array
             items:
               $ref: "#/schemas/Word"
-          words:
-            type: array
-            items:
-              type: string
+          translation:
+            type: string
 
   TaskType:
     type: string
