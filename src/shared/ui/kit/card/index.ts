@@ -1,4 +1,4 @@
-export { default as Card } from "./ui-card.vue"
+export { default as UiCard } from "./ui-card.vue"
 export { default as CardAction } from "./card-action.vue"
 export { default as CardContent } from "./card-content.vue"
 export { default as CardDescription } from "./card-description.vue"

@@ -5,8 +5,12 @@ import {
   useGetUnitsBySectionNumberQuery,
 } from "@/entities/language"
 import { useRoute } from "vue-router"
-import { UnitsList, useScrollToUnit } from "@/features/language"
-import { useCourseProgressStore } from "@/features/language"
+import {
+  UnitsList,
+  useScrollToUnit,
+  useCourseProgressStore,
+  ResetProgressBtn,
+} from "@/features/language"
 
 const route = useRoute()
 const sectionNumber = parseInt(route.params.sectionNumber as string)
@@ -36,6 +40,11 @@ const { listRef } = useScrollToUnit(
 
 <template>
   <div class="relative">
+    <div
+      class="fixed flex justify-center w-full py-2 top-0 left-0 right-0 bg-white z-40"
+    >
+      <ResetProgressBtn />
+    </div>
     <UnitsList
       ref="listRef"
       :sectionNumber="sectionNumber"

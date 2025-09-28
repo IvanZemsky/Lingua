@@ -42,6 +42,10 @@ export const useCourseProgressStore = defineStore("course-progress", () => {
     }))
   }
 
+  function reset() {
+    progress.value = initialProgress
+  }
+
   function updateProgress() {
     const { unit, number, variant } = progress.value.lesson
     const currentUnit = units.value.find((u) => u.number === unit)
@@ -66,8 +70,6 @@ export const useCourseProgressStore = defineStore("course-progress", () => {
       progress.value.lesson = { unit: unit + 1, number: 1, variant: 0 }
       return
     }
-
-    console.log("Курс завершён 🎉")
   }
 
   function getLessonStatus(lesson: {
@@ -80,7 +82,7 @@ export const useCourseProgressStore = defineStore("course-progress", () => {
     return "unreached"
   }
 
-  return { progress, units, convertUnitToUnitWithProgress, updateProgress }
+  return { progress, units, convertUnitToUnitWithProgress, updateProgress, reset }
 })
 
 function getIsCompleted(

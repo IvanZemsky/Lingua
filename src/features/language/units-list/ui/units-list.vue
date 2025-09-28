@@ -34,12 +34,12 @@ const progress = useCourseProgressStore()
       v-if="data?.length && desc.unitTitle"
       :title="`Section ${sectionNumber}, Unit ${desc.unitNumber}`"
       :subtitle="desc.unitTitle"
-      class="fixed top-5 left-4 right-4"
+      class="fixed top-12 left-4 right-4"
     />
 
     <div
       v-for="(unit, i) in data"
-      :class="['w-full', { 'pt-25': i === 0 }]"
+      :class="['w-full', { 'pt-30': i === 0 }]"
       :key="unit.number"
       :data-unit="unit.number"
       ref="targetRefs"

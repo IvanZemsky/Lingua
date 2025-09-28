@@ -45,7 +45,7 @@ onMounted(() => {
       {{ TASK_TYPES_TITLES[data.type] }}
     </h1>
 
-    <p>{{ data.translation }}</p>
+    <p class="text-lg">{{ data.translation }}</p>
 
     <p class="flex flex-wrap items-center gap-1 text-[18px]">
       <template v-for="(word, i) in parsedWords" :key="word.id">

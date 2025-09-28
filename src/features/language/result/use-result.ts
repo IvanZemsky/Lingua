@@ -19,8 +19,16 @@ export function useResult() {
     result.value.correct++
   }
 
+  function reset() {
+    result.value = {
+      mistakes: 0,
+      correct: 0,
+    }
+  }
+
   return {
     result,
+    reset,
     increaseMistakes,
     increaseCorrect,
   }
