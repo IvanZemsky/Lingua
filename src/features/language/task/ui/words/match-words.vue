@@ -37,16 +37,20 @@ function selectTranslation(translation: string) {
   }
 }
 
-function isTranslationSelectedCorrectly(word: string) {
-  return matches.value[word] === result[word]
+type WordStatus = "selected" | "correct" | "incorrect" | "default"
+
+function getTranslationStatus(translation: string): WordStatus {
+  if (selected.value === translation) return "selected"
+  if (matches.value[translation] === result[translation]) return "correct"
+  if (matches.value[translation]) return "incorrect"
+
+  return "default"
 }
 
-function isTranslationSelectedIncorrectly(word: string) {
-  return matches.value[word] && matches.value[word] !== result[word]
-}
-
-function isSelected(word: string) {
-  return selected.value === word
+function getWordStatus(word: string) {
+  if (matchesHasWord(word) && isWordSelectedCorrectly(word)) return "correct"
+  if (matchesHasWord(word) && !isWordSelectedCorrectly(word)) return "incorrect"
+  return "default"
 }
 
 function isWordSelectedCorrectly(translation: string) {
@@ -59,6 +63,13 @@ function isWordSelectedCorrectly(translation: string) {
 
 function matchesHasWord(translation: string) {
   return Object.values(matches.value).includes(translation)
+}
+
+const btnStyles = {
+  default: "",
+  selected: "bg-gray-200",
+  correct: "border-green-400",
+  incorrect: "border-red-400",
 }
 </script>
 
@@ -73,11 +84,9 @@ function matchesHasWord(translation: string) {
         size="lg"
         :class="[
           `text-xl w-full h-15 capitalize`,
-          isSelected(translation) && 'bg-gray-400',
-          isTranslationSelectedCorrectly(translation) && 'border-green-400',
-          isTranslationSelectedIncorrectly(translation) && 'border-red-400',
+          btnStyles[getTranslationStatus(translation)],
         ]"
-        :disabled="isTranslationSelectedCorrectly(translation)"
+        :disabled="getTranslationStatus(translation) === 'correct'"
       >
         {{ translation }}
       </UiButton>
@@ -91,13 +100,9 @@ function matchesHasWord(translation: string) {
         size="lg"
         :class="[
           `text-xl w-full h-15 capitalize`,
-          matchesHasWord(word)
-            ? isWordSelectedCorrectly(word)
-              ? 'border-green-400'
-              : 'border-red-400'
-            : '',
+          btnStyles[getWordStatus(word)],
         ]"
-        :disabled="matchesHasWord(word) && isWordSelectedCorrectly(word)"
+        :disabled="getWordStatus(word) === 'correct'"
       >
         {{ word }}
       </UiButton>
