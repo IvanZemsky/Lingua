@@ -174,7 +174,7 @@ export interface components {
              * @description Type of task
              * @enum {string}
              */
-            type: "listen-and-write-all" | "translate-all" | "write-part" | "listen-and-place-in-order" | "select-word-by-image";
+            type: "listen-and-write-all" | "translate-all" | "write-part" | "listen-and-place-in-order" | "select-word-by-image" | "match-words";
             result: string[] | string;
         };
         Word: {
@@ -258,7 +258,19 @@ export interface components {
              */
             type: "select-word-by-image";
         };
-        Task: components["schemas"]["TaskListenAndWriteAll"] | components["schemas"]["TaskTranslateAll"] | components["schemas"]["TaskWritePart"] | components["schemas"]["TaskListenAndPlaceInOrder"] | components["schemas"]["TaskSelectWordByImage"];
+        TaskMatchWords: components["schemas"]["TaskBase"] & {
+            /** @enum {string} */
+            type: "match-words";
+            words: components["schemas"]["Word"][];
+            result: string;
+        } & {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "match-words";
+        };
+        Task: components["schemas"]["TaskListenAndWriteAll"] | components["schemas"]["TaskTranslateAll"] | components["schemas"]["TaskWritePart"] | components["schemas"]["TaskListenAndPlaceInOrder"] | components["schemas"]["TaskSelectWordByImage"] | components["schemas"]["TaskMatchWords"];
         Variant: {
             /** @description Unique identifier for the variant */
             id: string;

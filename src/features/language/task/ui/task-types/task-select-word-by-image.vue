@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TASK_TYPES_TITLES } from "./index"
+import { TASK_TYPES_TITLES } from "../../model/index"
 import type { UseSpeechSynthesisOptions } from "@vueuse/core"
 import TextSelectWord from "../words/text-select-word.vue"
 import TaskWord from "../words/task-word.vue"

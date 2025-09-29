@@ -26,6 +26,7 @@ export type {
   TaskListenAndWriteAll,
   TaskTranslateAll,
   TaskWritePart,
+  TaskMatchWords,
 } from "./model/task"
 export { needToShowTranslation } from "./model/task"
 

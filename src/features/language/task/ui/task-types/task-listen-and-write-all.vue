@@ -4,7 +4,7 @@ import {
   getWordsAsText,
   parsePunctuation,
 } from "@/entities/language"
-import { TASK_TYPES_TITLES } from "./index"
+import { TASK_TYPES_TITLES } from "../../model/index"
 import { UiTextarea } from "@/shared/ui"
 import VoiceoverBlock from "../voiceover/voiceover-block.vue"
 import type { UseSpeechSynthesisOptions } from "@vueuse/core"

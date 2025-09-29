@@ -4,7 +4,7 @@ import {
   type TaskWritePart,
   isWordInput,
 } from "@/entities/language"
-import { TASK_TYPES_TITLES } from "./index"
+import { TASK_TYPES_TITLES } from "../../model/index"
 import TaskWord from "../words/task-word.vue"
 import { UiInput } from "@/shared/ui"
 import { onMounted, ref } from "vue"

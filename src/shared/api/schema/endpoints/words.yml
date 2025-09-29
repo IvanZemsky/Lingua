@@ -1,0 +1,65 @@
+schemas:
+  WordWithoutSign:
+    type: object
+    required:
+      - id
+      - text
+      - translations
+    properties:
+      id:
+        type: string
+      text:
+        type: string
+      translations:
+        type: array
+        items:
+          type: string
+
+  WordInput:
+    type: object
+    required:
+      - id
+      - text
+      - input
+      - translations
+    properties:
+      id:
+        type: string
+      text:
+        type: string
+      input:
+        type: boolean
+      translations:
+        type: array
+        items:
+          type: string
+
+  Word:
+    type: object
+    required:
+      - id
+      - text
+      - translations
+    properties:
+      id:
+        type: string
+      text:
+        type: string
+      translations:
+        type: array
+        items:
+          type: string
+
+  WordImg:
+    type: object
+    required:
+      - id
+      - text
+      - img
+    properties:
+      id:
+        type: string
+      text:
+        type: string
+      img:
+        type: string

@@ -7,6 +7,7 @@ schemas:
       - $ref: "#/schemas/TaskWritePart"
       - $ref: "#/schemas/TaskListenAndPlaceInOrder"
       - $ref: "#/schemas/TaskSelectWordByImage"
+      - $ref: "#/schemas/TaskMatchWords"
     discriminator:
       propertyName: type
       mapping:
@@ -15,6 +16,7 @@ schemas:
         write-part: "#/schemas/TaskWritePart"
         listen-and-place-in-order: "#/schemas/TaskListenAndPlaceInOrder"
         select-word-by-image: "#/schemas/TaskSelectWordByImage"
+        match-words: "#/schemas/TaskMatchWords"
 
   TaskBase:
     type: object
@@ -34,6 +36,7 @@ schemas:
           - write-part
           - listen-and-place-in-order
           - select-word-by-image
+          - match-words
         description: Type of task
       result:
         oneOf:
@@ -41,71 +44,6 @@ schemas:
             items:
               type: string
           - type: string
-
-  WordWithoutSign:
-    type: object
-    required:
-      - id
-      - text
-      - translations
-    properties:
-      id:
-        type: string
-      text:
-        type: string
-      translations:
-        type: array
-        items:
-          type: string
-
-  WordInput:
-    type: object
-    required:
-      - id
-      - text
-      - input
-      - translations
-    properties:
-      id:
-        type: string
-      text:
-        type: string
-      input:
-        type: boolean
-      translations:
-        type: array
-        items:
-          type: string
-
-  Word:
-    type: object
-    required:
-      - id
-      - text
-      - translations
-    properties:
-      id:
-        type: string
-      text:
-        type: string
-      translations:
-        type: array
-        items:
-          type: string
-
-  WordImg:
-    type: object
-    required:
-      - id
-      - text
-      - img
-    properties:
-      id:
-        type: string
-      text:
-        type: string
-      img:
-        type: string
 
   TaskListenAndWriteAll:
     allOf:
@@ -123,7 +61,7 @@ schemas:
           text:
             type: array
             items:
-              $ref: "#/schemas/Word"
+              $ref: "./words.yml#/schemas/Word"
           translation:
             type: string
           result:
@@ -147,7 +85,7 @@ schemas:
           text:
             type: array
             items:
-              $ref: "#/schemas/Word"
+              $ref: "./words.yml#/schemas/Word"
           translation:
             type: string
           result:
@@ -172,8 +110,8 @@ schemas:
             type: array
             items:
               oneOf:
-                - $ref: "#/schemas/Word"
-                - $ref: "#/schemas/WordInput"
+                - $ref: "./words.yml#/schemas/Word"
+                - $ref: "./words.yml#/schemas/WordInput"
           translation:
             type: string
           result:
@@ -197,7 +135,7 @@ schemas:
           text:
             type: array
             items:
-              $ref: "#/schemas/Word"
+              $ref: "./words.yml#/schemas/Word"
           translation:
             type: string
           result:
@@ -221,11 +159,30 @@ schemas:
           words:
             type: array
             items:
-              $ref: "#/schemas/WordImg"
+              $ref: "./words.yml#/schemas/WordImg"
           result:
             type: string
           wordToGuess:
-            $ref: "#/schemas/Word"
+            $ref: "./words.yml#/schemas/Word"
+
+  TaskMatchWords:
+    allOf:
+      - $ref: "#/schemas/TaskBase"
+      - type: object
+        required:
+          - words
+          - type
+          - result
+        properties:
+          type:
+            type: string
+            enum: [match-words]
+          words:
+            type: array
+            items:
+              $ref: "./words.yml#/schemas/Word"
+          result:
+            type: string
 
   TaskType:
     type: string
@@ -235,6 +192,7 @@ schemas:
       - write-part
       - listen-and-place-in-order
       - select-word-by-image
+      - match-words
 
   TaskList:
     type: array

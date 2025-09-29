@@ -4,7 +4,7 @@ import {
   parsePunctuation,
   type TaskListenAndPlaceInOrder,
 } from "@/entities/language"
-import { TASK_TYPES_TITLES } from "./index"
+import { TASK_TYPES_TITLES } from "../../model/index"
 import VoiceoverBlock from "../voiceover/voiceover-block.vue"
 import TaskSelectWords from "../words/task-select-words.vue"
 

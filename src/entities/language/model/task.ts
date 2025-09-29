@@ -12,11 +12,16 @@ export type TaskListenAndPlaceInOrder = APISchemas["TaskListenAndPlaceInOrder"]
 
 export type TaskSelectWordByImage = APISchemas["TaskSelectWordByImage"]
 
-export type TaskType = Task["type"]
+export type TaskMatchWords = APISchemas["TaskMatchWords"]
 
+export type TaskType = Task["type"]
 
 export function needToShowTranslation(
   task: Task,
 ): task is TaskListenAndWriteAll | TaskWritePart {
-  return task.type !== "translate-all" && task.type !== "select-word-by-image"
+  return (
+    task.type !== "translate-all" &&
+    task.type !== "select-word-by-image" &&
+    task.type !== "match-words"
+  )
 }

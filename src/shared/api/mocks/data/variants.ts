@@ -154,6 +154,33 @@ export const MOCK_VARIANTS: components["schemas"]["Variant"][] = [
         ],
         translation: "Juan is from Spain",
       },
+      {
+        number: 6,
+        type: "match-words",
+        result: "world-mundo tree-arbol cat-gato dog-perro",
+        words: [
+          {
+            id: "1",
+            text: "mundo",
+            translations: ["world"],
+          },
+          {
+            id: "2",
+            text: "arbol",
+            translations: ["tree"],
+          },
+          {
+            id: "3",
+            text: "gato",
+            translations: ["cat"],
+          },
+          {
+            id: "4",
+            text: "perro",
+            translations: ["dog"],
+          },
+        ]
+      }
     ],
   },
 ]

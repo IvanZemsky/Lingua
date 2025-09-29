@@ -3,7 +3,7 @@ import { parsePunctuation, type TaskTranslateAll } from "@/entities/language"
 import TaskWord from "../words/task-word.vue"
 import { UiTextarea } from "@/shared/ui"
 import { Volume2Icon } from "lucide-vue-next"
-import { TASK_TYPES_TITLES } from "."
+import { TASK_TYPES_TITLES } from "../../model"
 
 type Props = {
   data: TaskTranslateAll

@@ -16,7 +16,7 @@ export {
   LessonEndScreen,
 }
 
-export { TASK_TYPES_UI } from "./task/ui/task-types"
+export { TASK_TYPES_UI } from "./task/model"
 
 export { useScrollToUnit } from "./units-list/model/use-scroll-to-unit"
 export { useSpeechStore } from "./model/speech-store"
