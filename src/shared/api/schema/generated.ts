@@ -175,7 +175,7 @@ export interface components {
              * @enum {string}
              */
             type: "listen-and-write-all" | "translate-all" | "write-part" | "listen-and-place-in-order" | "select-word-by-image";
-            results?: string[];
+            result: string[] | string;
         };
         Word: {
             id: string;
@@ -187,7 +187,7 @@ export interface components {
             type: "listen-and-write-all";
             text: components["schemas"]["Word"][];
             translation: string;
-            results: string[];
+            result: string[];
         } & {
             /**
              * @description discriminator enum property added by openapi-typescript
@@ -200,7 +200,7 @@ export interface components {
             type: "translate-all";
             text: components["schemas"]["Word"][];
             translation: string;
-            results: string[];
+            result: string[];
         } & {
             /**
              * @description discriminator enum property added by openapi-typescript
@@ -219,7 +219,7 @@ export interface components {
             type: "write-part";
             text: (components["schemas"]["Word"] | components["schemas"]["WordInput"])[];
             translation: string;
-            results: string[];
+            result: string[];
         } & {
             /**
              * @description discriminator enum property added by openapi-typescript
@@ -232,7 +232,7 @@ export interface components {
             type: "listen-and-place-in-order";
             text: components["schemas"]["Word"][];
             translation: string;
-            results: string[];
+            result: string[];
         } & {
             /**
              * @description discriminator enum property added by openapi-typescript

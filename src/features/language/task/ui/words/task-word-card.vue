@@ -16,11 +16,11 @@ defineEmits<{
 <template>
   <button
     :class="[
-      'flex items-center justify-center p-4 border-2 rounded-xl transition-all',
+      'aspect-square flex items-center justify-center p-4 border-2 rounded-xl transition-all',
       isSelected ? 'border-blue-400' : 'border-gray-200 hover:border-gray-300',
     ]"
     @click="$emit('click', word.text)"
   >
-    <img :src="word.img" :alt="word.text" class="w-full h-full" />
+    <img :src="word.img" :alt="word.text" class="w-full h-full rounded-lg" />
   </button>
 </template>

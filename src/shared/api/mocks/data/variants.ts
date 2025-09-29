@@ -21,29 +21,29 @@ export const MOCK_VARIANTS: components["schemas"]["Variant"][] = [
           {
             id: "1",
             text: "mundo",
-            img: "https://placehold.co/600x400?text=World",
+            img: "https://placehold.co/400x400?text=World",
           },
           {
             id: "2",
             text: "tree",
-            img: "https://placehold.co/600x400?text=Tree",
+            img: "https://placehold.co/400x400?text=Tree",
           },
           {
             id: "3",
             text: "cat",
-            img: "https://placehold.co/600x400?text=Cat",
+            img: "https://placehold.co/400x400?text=Cat",
           },
           {
             id: "4",
             text: "dog",
-            img: "https://placehold.co/600x400?text=Dog",
+            img: "https://placehold.co/400x400?text=Dog",
           },
         ],
       },
       {
         number: 2,
         type: "translate-all",
-        results: ["hello world"],
+        result: ["hello world"],
         text: [
           {
             id: "1",
@@ -71,7 +71,7 @@ export const MOCK_VARIANTS: components["schemas"]["Variant"][] = [
       {
         number: 3,
         type: "listen-and-write-all",
-        results: ["juan es espanol"],
+        result: ["juan es espanol"],
         text: [
           {
             id: "1",
@@ -94,7 +94,7 @@ export const MOCK_VARIANTS: components["schemas"]["Variant"][] = [
       {
         number: 4,
         type: "write-part",
-        results: ["juan es de espana"],
+        result: ["juan es de espana"],
         text: [
           {
             id: "1",
@@ -129,7 +129,7 @@ export const MOCK_VARIANTS: components["schemas"]["Variant"][] = [
       {
         number: 5,
         type: "listen-and-place-in-order",
-        results: ["juan es de espana"],
+        result: ["juan es de espana"],
         text: [
           {
             id: "1",

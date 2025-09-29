@@ -14,7 +14,7 @@ function handleCardClick(text: string) {
 </script>
 
 <template>
-  <div class="grow-1 grid grid-cols-2 grid-rows-2 gap-3">
+  <div class="grid grid-cols-2 grid-rows-2 gap-3 my-auto">
     <TaskWordCard
       v-for="word in words"
       :key="word.id"

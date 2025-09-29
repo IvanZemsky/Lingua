@@ -18,5 +18,5 @@ export type TaskType = Task["type"]
 export function needToShowTranslation(
   task: Task,
 ): task is TaskListenAndWriteAll | TaskWritePart {
-  return task.type !== "translate-all"
+  return task.type !== "translate-all" && task.type !== "select-word-by-image"
 }

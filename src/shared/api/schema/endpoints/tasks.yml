@@ -21,6 +21,7 @@ schemas:
     required:
       - number
       - type
+      - result
     properties:
       number:
         type: integer
@@ -34,10 +35,12 @@ schemas:
           - listen-and-place-in-order
           - select-word-by-image
         description: Type of task
-      results:
-        type: array
-        items:
-          type: string
+      result:
+        oneOf:
+          - type: array
+            items:
+              type: string
+          - type: string
 
   WordWithoutSign:
     type: object
@@ -112,7 +115,7 @@ schemas:
           - text
           - type
           - translation
-          - results
+          - result
         properties:
           type:
             type: string
@@ -123,7 +126,7 @@ schemas:
               $ref: "#/schemas/Word"
           translation:
             type: string
-          results:
+          result:
             type: array
             items:
               type: string
@@ -136,7 +139,7 @@ schemas:
           - text
           - type
           - translation
-          - results
+          - result
         properties:
           type:
             type: string
@@ -147,7 +150,7 @@ schemas:
               $ref: "#/schemas/Word"
           translation:
             type: string
-          results:
+          result:
             type: array
             items:
               type: string
@@ -160,7 +163,7 @@ schemas:
           - text
           - translation
           - type
-          - results
+          - result
         properties:
           type:
             type: string
@@ -173,7 +176,7 @@ schemas:
                 - $ref: "#/schemas/WordInput"
           translation:
             type: string
-          results:
+          result:
             type: array
             items:
               type: string
@@ -186,7 +189,7 @@ schemas:
           - text
           - type
           - translation
-          - results
+          - result
         properties:
           type:
             type: string
@@ -197,7 +200,7 @@ schemas:
               $ref: "#/schemas/Word"
           translation:
             type: string
-          results:
+          result:
             type: array
             items:
               type: string
@@ -223,8 +226,6 @@ schemas:
             type: string
           wordToGuess:
             $ref: "#/schemas/Word"
-
-            
 
   TaskType:
     type: string
