@@ -7,9 +7,9 @@ import {
 import { useRoute } from "vue-router"
 import {
   UnitsList,
-  useScrollToUnit,
   useCourseProgressStore,
   ResetProgressBtn,
+  ScrollToLessonBtn,
 } from "@/features/language"
 
 const route = useRoute()
@@ -31,11 +31,6 @@ const { data, isFetching, error } = useGetUnitsBySectionNumberQuery<
     return { data }
   },
 })
-
-const { listRef } = useScrollToUnit(
-  data,
-  courseProgressStore.progress.lesson.unit,
-)
 </script>
 
 <template>
@@ -46,11 +41,16 @@ const { listRef } = useScrollToUnit(
       <ResetProgressBtn />
     </div>
     <UnitsList
-      ref="listRef"
       :sectionNumber="sectionNumber"
       :data="data"
       :is-fetching="isFetching"
       :error="error"
-    />
+    >
+      <template #scroll-to-lesson-btn>
+        <ScrollToLessonBtn
+          :currentLesson="courseProgressStore.progress.lesson"
+        />
+      </template>
+    </UnitsList>
   </div>
 </template>

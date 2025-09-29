@@ -3,7 +3,7 @@ import { useLocalStorage } from "@vueuse/core"
 import { defineStore } from "pinia"
 import { ref } from "vue"
 
-type CourseProgressLS = {
+export type CourseProgressLS = {
   section: number
   lesson: {
     unit: number

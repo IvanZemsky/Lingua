@@ -34,10 +34,4 @@ export {
   DialogTrigger,
 } from "./kit/dialog"
 
-export {
-  UiButton,
-  UiProgress,
-  UiInput,
-  UiTextarea,
-  DonutChart,
-}
+export { UiButton, UiProgress, UiInput, UiTextarea, DonutChart }

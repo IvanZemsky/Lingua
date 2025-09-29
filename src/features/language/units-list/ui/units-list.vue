@@ -47,11 +47,15 @@ const progress = useCourseProgressStore()
     >
       <ListHeader v-if="i !== 0" :title="unit.title" />
 
-      <div class="flex flex-col items-center gap-6">
+      <div class="relative flex flex-col items-center gap-6">
+        <slot name="scroll-to-lesson-btn"/>
+
         <LessonBtn
+          v-for="lesson in unit.lessons"
+          :key="lesson.number"
+          :data-lesson="lesson.number"
           :as="RouterLink"
           :status="lesson.status"
-          v-for="lesson in unit.lessons"
           :to="
             getLessonPagePath(
               sectionNumber,
@@ -60,7 +64,6 @@ const progress = useCourseProgressStore()
               progress.progress.lesson.variant,
             )
           "
-          :key="lesson.number"
           :percentage="
             ((progress.progress.lesson.variant - 1) / lesson.totalVariants) *
             100
