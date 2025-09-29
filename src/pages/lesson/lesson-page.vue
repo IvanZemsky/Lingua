@@ -41,6 +41,7 @@ const task = reactive(useTask(data, answer, result))
 
     <component
       v-if="task.state === 'in-progress' && task.currentTask"
+      :key="task.currentTask.number"
       v-model:answer="answer.answerValue"
       :is="TASK_TYPES_UI[task.currentTask.type]"
       :data="task.currentTask"

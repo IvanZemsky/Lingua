@@ -11,22 +11,22 @@ export const MOCK_UNITS: components["schemas"]["UnitList"] = [
       {
         id: "lesson-1-unit-1",
         number: 1,
-        totalVariants: 5,
+        totalVariants: 3,
       },
       {
         id: "lesson-2-unit-1",
         number: 2,
-        totalVariants: 5,
+        totalVariants: 3,
       },
       {
         id: "lesson-3-unit-1",
         number: 3,
-        totalVariants: 3,
+        totalVariants: 2,
       },
       {
         id: "lesson-4-unit-1",
         number: 4,
-        totalVariants: 3,
+        totalVariants: 2,
       },
       {
         id: "lesson-5-unit-1",

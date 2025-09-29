@@ -33,6 +33,13 @@ export function parsePunctuation(words: TextWord[]): TextWord[] {
     .filter((w) => w !== undefined)
 }
 
+export function parseWordText(wordText: string) {
+  const text = wordText.split("+")
+  if (text.length === 1) return text[0]
+
+  return text.join(" ")
+}
+
 export function getWordsAsText(words: Word[]): string {
   return words.map((word) => word.text).join(" ")
 }

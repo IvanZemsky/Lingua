@@ -16,6 +16,7 @@ export {
   type TextWord,
   parsePunctuation,
   getWordsAsText,
+  parseWordText,
   isWordInput,
 } from "./model/word"
 

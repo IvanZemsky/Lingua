@@ -54,20 +54,20 @@ export const useCourseProgressStore = defineStore("course-progress", () => {
     const currentLesson = currentUnit.lessons.find((l) => l.number === number)
     if (!currentLesson) return
 
-    if (variant + 1 < currentLesson.totalVariants) {
+    if (variant < currentLesson.totalVariants) {
       progress.value.lesson.variant++
       return
     }
 
-    const nextLesson = currentUnit.lessons.find((l) => l.number === number + 1)
+    const nextLesson = currentUnit.lessons.find((l) => l.number === number)
     if (nextLesson) {
-      progress.value.lesson = { unit, number: number + 1, variant: 0 }
+      progress.value.lesson = { unit, number: number + 1, variant: 1 }
       return
     }
 
     const nextUnit = units.value.find((u) => u.number === unit + 1)
     if (nextUnit) {
-      progress.value.lesson = { unit: unit + 1, number: 1, variant: 0 }
+      progress.value.lesson = { unit: unit + 1, number: 1, variant: 1 }
       return
     }
   }

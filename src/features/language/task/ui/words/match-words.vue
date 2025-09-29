@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TextWord } from "@/entities/language"
+import { parseWordText, type TextWord } from "@/entities/language"
 import { UiButton } from "@/shared/ui"
 import { shuffle } from "@/shared/lib"
 import { computed } from "vue"
@@ -88,7 +88,7 @@ const btnStyles = {
         ]"
         :disabled="getTranslationStatus(translation) === 'correct'"
       >
-        {{ translation }}
+        {{ parseWordText(translation) }}
       </UiButton>
     </div>
     <div class="grow-1 flex flex-col gap-2">
@@ -104,7 +104,7 @@ const btnStyles = {
         ]"
         :disabled="getWordStatus(word) === 'correct'"
       >
-        {{ word }}
+        {{ parseWordText(word) }}
       </UiButton>
     </div>
   </div>

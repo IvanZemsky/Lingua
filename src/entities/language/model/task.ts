@@ -22,6 +22,7 @@ export function needToShowTranslation(
   return (
     task.type !== "translate-all" &&
     task.type !== "select-word-by-image" &&
-    task.type !== "match-words"
+    task.type !== "match-words" &&
+    task.type !== "write-part"
   )
 }

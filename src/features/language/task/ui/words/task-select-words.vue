@@ -35,6 +35,8 @@ function deselectWord(word: string) {
       <UiButton
         v-for="(word, i) in selectedWords"
         :key="i"
+        size="lg"
+        class="text-md"
         variant="secondary"
         @click="deselectWord(word)"
       >
@@ -43,11 +45,13 @@ function deselectWord(word: string) {
     </div>
   </div>
 
-  <div class="border-2 border-2-gray-300 p-2 rounded-2xl min-h-[56px]">
+  <div class="border-2 border-2-gray-300 p-2 rounded-2xl min-h-[108px]">
     <div class="flex flex-wrap gap-2 justify-center">
       <UiButton
         v-for="word in wordsToSelect"
         :key="word.id"
+        size="lg"
+        class="text-md"
         variant="secondary"
         @click="selectWord(word)"
       >

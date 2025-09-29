@@ -24,7 +24,7 @@ const answer = defineModel("answer", { type: String, required: true })
 const parsedWords = parsePunctuation(data.text)
 const answerParts = ref<string[]>([])
 
-const letterWidthPx = 10
+const letterWidthPx = 15
 
 function updateInput(index: number, value: string) {
   answerParts.value[index] = value

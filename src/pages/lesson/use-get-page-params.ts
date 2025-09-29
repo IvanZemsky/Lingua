@@ -1,7 +1,7 @@
 import { useRoute } from "vue-router"
 
 export function useGetPageParams() {
-  const route = useRoute()
+  const route = useRoute("lesson")
 
   return {
     sectionNumber: parseInt(route.params.sectionNumber as string),
