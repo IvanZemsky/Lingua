@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { parsePunctuation, type TaskTranslateAll } from "@/entities/language"
-import TaskWord from "../task-word.vue"
+import TaskWord from "../words/task-word.vue"
 import { UiTextarea } from "@/shared/ui"
 import { Volume2Icon } from "lucide-vue-next"
 import { TASK_TYPES_TITLES } from "."
@@ -25,7 +25,9 @@ const parsedWords = parsePunctuation(data.text)
 
 <template>
   <div class="flex flex-col gap-4 grow-1">
-    <h1 class="font-bold text-[25px] font-montserrat">{{ TASK_TYPES_TITLES[data.type] }}</h1>
+    <h1 class="font-bold text-[25px] font-montserrat">
+      {{ TASK_TYPES_TITLES[data.type] }}
+    </h1>
 
     <p class="flex flex-wrap items-center gap-1 text-[18px]">
       <button
@@ -34,7 +36,7 @@ const parsedWords = parsePunctuation(data.text)
           $emit('play-audio', parsedWords.map((word) => word.text).join(' '))
         "
       >
-        <Volume2Icon class="w-7 h-7"/>
+        <Volume2Icon class="w-7 h-7" />
       </button>
       <TaskWord
         v-for="word in parsedWords"

@@ -1,17 +1,21 @@
 import type { APISchemas } from "@/shared/api"
 
-export type Word = WordBase | WordInput
+export type Word = WordBase | WordInput | WordImg
 
 export type WordBase = APISchemas["Word"]
 
 export type WordInput = APISchemas["WordInput"]
 
+export type WordImg = APISchemas["WordImg"]
+
+export type TextWord = WordBase | WordInput
+
 /**
  * @description Parse words that have no translation.
  * If word has no translation, it will be merged with the previous word and must be perceived as a punctuation mark
- * @returns Word[]
+ * @returns TextWord[]
  */
-export function parsePunctuation(words: Word[]): Word[] {
+export function parsePunctuation(words: TextWord[]): TextWord[] {
   return words
     .map((word, i, array) => {
       if (word.translations.length === 0) return

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { Word } from "@/entities/language"
+import type { TextWord } from "@/entities/language"
 import { UiPopover, PopoverContent, PopoverTrigger } from "@/shared/ui"
 
 type Props = {
-  word: Word
+  word: TextWord
 }
 
 defineProps<Props>()

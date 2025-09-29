@@ -6,16 +6,22 @@ export function useAnswer() {
   const isChecked = ref(false)
   const variant = computed(getVariant)
 
-  function checkAnswer(results: string[] | undefined) {
-    if (!results) return
-    const isAnswerCorrect = compareWithResult(results)
+  function checkAnswer(result: string[] | string | undefined) {
+    console.log("check")
+    if (!result) return
+    const isAnswerCorrect = compareWithResult(result)
+
+    console.log(isAnswerCorrect)
 
     isCorrect.value = isAnswerCorrect
     isChecked.value = true
   }
 
-  function compareWithResult(results: string[]) {
-    return results.includes(answerValue.value.trim().toLowerCase())
+  function compareWithResult(result: string[] | string) {
+    if (Array.isArray(result)) {
+      return result.includes(answerValue.value.trim().toLowerCase())
+    }
+    return result === answerValue.value.trim().toLowerCase()
   }
 
   function getVariant() {

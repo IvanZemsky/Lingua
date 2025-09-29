@@ -6,7 +6,7 @@ import {
 } from "@/entities/language"
 import { TASK_TYPES_TITLES } from "./index"
 import VoiceoverBlock from "../voiceover/voiceover-block.vue"
-import TaskSelectWords from "../task-select-words.vue"
+import TaskSelectWords from "../words/task-select-words.vue"
 
 type Props = {
   data: TaskListenAndPlaceInOrder

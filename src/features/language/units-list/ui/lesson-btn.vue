@@ -17,8 +17,6 @@ const props = withDefaults(defineProps<Props>(), {
   as: "button",
 })
 
-console.log(props.percentage)
-
 const icons = {
   completed: Check,
   unreached: Star,

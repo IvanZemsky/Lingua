@@ -10,6 +10,38 @@ export const MOCK_VARIANTS: components["schemas"]["Variant"][] = [
     tasks: [
       {
         number: 1,
+        type: "select-word-by-image",
+        result: "mundo",
+        wordToGuess: {
+          id: "1",
+          text: "mundo",
+          translations: ["world"],
+        },
+        words: [
+          {
+            id: "1",
+            text: "mundo",
+            img: "https://placehold.co/600x400?text=World",
+          },
+          {
+            id: "2",
+            text: "tree",
+            img: "https://placehold.co/600x400?text=Tree",
+          },
+          {
+            id: "3",
+            text: "cat",
+            img: "https://placehold.co/600x400?text=Cat",
+          },
+          {
+            id: "4",
+            text: "dog",
+            img: "https://placehold.co/600x400?text=Dog",
+          },
+        ],
+      },
+      {
+        number: 2,
         type: "translate-all",
         results: ["hello world"],
         text: [
@@ -37,7 +69,7 @@ export const MOCK_VARIANTS: components["schemas"]["Variant"][] = [
         translation: "hello world",
       },
       {
-        number: 2,
+        number: 3,
         type: "listen-and-write-all",
         results: ["juan es espanol"],
         text: [
@@ -60,7 +92,7 @@ export const MOCK_VARIANTS: components["schemas"]["Variant"][] = [
         translation: "Juan is Spanish",
       },
       {
-        number: 3,
+        number: 4,
         type: "write-part",
         results: ["juan es de espana"],
         text: [
@@ -95,7 +127,7 @@ export const MOCK_VARIANTS: components["schemas"]["Variant"][] = [
         translation: "Juan is from Spain",
       },
       {
-        number: 4,
+        number: 5,
         type: "listen-and-place-in-order",
         results: ["juan es de espana"],
         text: [

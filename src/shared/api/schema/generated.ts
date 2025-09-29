@@ -174,8 +174,8 @@ export interface components {
              * @description Type of task
              * @enum {string}
              */
-            type: "listen-and-write-all" | "translate-all" | "write-part" | "listen-and-place-in-order";
-            results: string[];
+            type: "listen-and-write-all" | "translate-all" | "write-part" | "listen-and-place-in-order" | "select-word-by-image";
+            results?: string[];
         };
         Word: {
             id: string;
@@ -187,6 +187,7 @@ export interface components {
             type: "listen-and-write-all";
             text: components["schemas"]["Word"][];
             translation: string;
+            results: string[];
         } & {
             /**
              * @description discriminator enum property added by openapi-typescript
@@ -199,6 +200,7 @@ export interface components {
             type: "translate-all";
             text: components["schemas"]["Word"][];
             translation: string;
+            results: string[];
         } & {
             /**
              * @description discriminator enum property added by openapi-typescript
@@ -217,6 +219,7 @@ export interface components {
             type: "write-part";
             text: (components["schemas"]["Word"] | components["schemas"]["WordInput"])[];
             translation: string;
+            results: string[];
         } & {
             /**
              * @description discriminator enum property added by openapi-typescript
@@ -229,6 +232,7 @@ export interface components {
             type: "listen-and-place-in-order";
             text: components["schemas"]["Word"][];
             translation: string;
+            results: string[];
         } & {
             /**
              * @description discriminator enum property added by openapi-typescript
@@ -236,7 +240,25 @@ export interface components {
              */
             type: "listen-and-place-in-order";
         };
-        Task: components["schemas"]["TaskListenAndWriteAll"] | components["schemas"]["TaskTranslateAll"] | components["schemas"]["TaskWritePart"] | components["schemas"]["TaskListenAndPlaceInOrder"];
+        WordImg: {
+            id: string;
+            text: string;
+            img: string;
+        };
+        TaskSelectWordByImage: components["schemas"]["TaskBase"] & {
+            /** @enum {string} */
+            type: "select-word-by-image";
+            words: components["schemas"]["WordImg"][];
+            result: string;
+            wordToGuess: components["schemas"]["Word"];
+        } & {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "select-word-by-image";
+        };
+        Task: components["schemas"]["TaskListenAndWriteAll"] | components["schemas"]["TaskTranslateAll"] | components["schemas"]["TaskWritePart"] | components["schemas"]["TaskListenAndPlaceInOrder"] | components["schemas"]["TaskSelectWordByImage"];
         Variant: {
             /** @description Unique identifier for the variant */
             id: string;

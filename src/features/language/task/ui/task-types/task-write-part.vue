@@ -5,7 +5,7 @@ import {
   isWordInput,
 } from "@/entities/language"
 import { TASK_TYPES_TITLES } from "./index"
-import TaskWord from "../task-word.vue"
+import TaskWord from "../words/task-word.vue"
 import { UiInput } from "@/shared/ui"
 import { onMounted, ref } from "vue"
 

@@ -26,7 +26,7 @@ export function useTask(
   )
 
   const variantClickCallbacks = {
-    notChecked: () => answer.checkAnswer(currentTask.value?.results),
+    notChecked: () => answer.checkAnswer(currentTask.value?.result),
     correct: () => {
       answer.handleCorrect()
       result.increaseCorrect()

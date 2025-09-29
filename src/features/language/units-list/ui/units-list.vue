@@ -7,6 +7,7 @@ import UnitDescCard from "./unit-desc-card.vue"
 import { useUnitDescCard } from "../model/use-unit-desc-card"
 import { ref, toRefs } from "vue"
 import { useCourseProgressStore } from "../../model/progress-store"
+import { getLessonPagePath } from "@/shared/model"
 
 type Props = {
   sectionNumber: number
@@ -51,7 +52,14 @@ const progress = useCourseProgressStore()
           :as="RouterLink"
           :status="lesson.status"
           v-for="lesson in unit.lessons"
-          :to="`/sections/${unit.sectionNumber}/units/${unit.number}/lessons/${lesson.number}/variants/${lesson.currentVariant}`"
+          :to="
+            getLessonPagePath(
+              sectionNumber,
+              unit.number,
+              lesson.number,
+              progress.progress.lesson.variant,
+            )
+          "
           :key="lesson.number"
           :percentage="
             ((progress.progress.lesson.variant - 1) / lesson.totalVariants) *

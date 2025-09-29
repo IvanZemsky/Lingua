@@ -10,6 +10,8 @@ export type TaskWritePart = APISchemas["TaskWritePart"]
 
 export type TaskListenAndPlaceInOrder = APISchemas["TaskListenAndPlaceInOrder"]
 
+export type TaskSelectWordByImage = APISchemas["TaskSelectWordByImage"]
+
 export type TaskType = Task["type"]
 
 
