@@ -1,0 +1,123 @@
+schemas:
+  Guidebook:
+    type: object
+    required:
+      - id
+      - sectionNumber
+      - unitNumber
+      - title
+      - content
+    properties:
+      id:
+        type: string
+        # format: uuid
+        description: Unique identifier for the guidebook
+      sectionNumber:
+        type: integer
+        description: Section number of the guidebook
+      unitNumber:
+        type: integer
+        description: Unit number of the guidebook
+      title:
+        type: string
+        description: Title of the guidebook
+      content:
+        type: array
+        items:
+          $ref: "#/schemas/GuidebookContent"
+
+  GuidebookContent:
+    type: object
+    oneOf:
+      - $ref: "#/schemas/GuidebookContentParagraph"
+      - $ref: "#/schemas/GuidebookContentImage"
+      - $ref: "#/schemas/GuidebookContentTable"
+    discriminator:
+      propertyName: type
+      mapping:
+        paragraph: "#/schemas/GuidebookContentParagraph"
+        img: "#/schemas/GuidebookContentImage"
+        table: "#/schemas/GuidebookContentTable"
+
+  GuidebookContentParagraph:
+    type: object
+    required:
+      - id
+      - type
+      - text
+    properties:
+      id:
+        type: string
+        # format: uuid
+      type:
+        type: string
+        enum: [paragraph]
+      text:
+        type: string
+
+  GuidebookContentImage:
+    type: object
+    required:
+      - id
+      - type
+      - url
+    properties:
+      id:
+        type: string
+        # format: uuid
+      type:
+        type: string
+        enum: [img]
+      url:
+        type: string
+        format: uri
+      alt:
+        type: string
+
+  GuidebookContentTable:
+    type: object
+    required:
+      - id
+      - type
+      - headers
+      - rows
+    properties:
+      id:
+        type: string
+        # format: uuid
+      type:
+        type: string
+        enum: [table]
+      headers:
+        type: array
+        items:
+          type: string
+      rows:
+        type: array
+        items:
+          type: array
+          items:
+            type: string
+
+getGuidebookByUnitAndSectionNumber:
+  description: Retrieve a guidebook by unit and section number
+  parameters:
+    - name: unitNumber
+      in: path
+      required: true
+      schema:
+        type: integer
+    - name: sectionNumber
+      in: path
+      required: true
+      schema:
+        type: integer
+  responses:
+    "200":
+      description: A guidebook
+      content:
+        application/json:
+          schema:
+            $ref: "#/schemas/Guidebook"
+    "404":
+      $ref: "../shared/responses.yml#/NotFoundError"

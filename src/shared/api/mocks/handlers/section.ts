@@ -3,6 +3,7 @@ import { http, HttpResponse } from "msw"
 import { MOCK_SECTIONS } from "../data/sections"
 import { MOCK_UNITS } from "../data/units"
 import { MOCK_VARIANTS } from "../data/variants"
+import { MOCK_GUIDEBOOKS } from "../data/guidebooks"
 
 export const sectionHandlers = [
   http.get(`${CONFIG.API_BASE_URL}/sections`, () => {
@@ -55,6 +56,27 @@ export const sectionHandlers = [
       }
 
       return HttpResponse.json(variant)
+    },
+  ),
+
+  http.get(
+    `${CONFIG.API_BASE_URL}/sections/:sectionNumber/units/:unitNumber/guidebook`,
+    (req) => {
+      const sectionNumber = parseInt(req.params.sectionNumber as string)
+      const unitNumber = parseInt(req.params.unitNumber as string)
+
+      const guidebook = MOCK_GUIDEBOOKS.find(
+        (g) => g.sectionNumber === sectionNumber && g.unitNumber === unitNumber,
+      )
+
+      if (!guidebook) {
+        return HttpResponse.json(
+          { message: "Guidebook not found" },
+          { status: 404 },
+        )
+      }
+
+      return HttpResponse.json(guidebook)
     },
   ),
 ]

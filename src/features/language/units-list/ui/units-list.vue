@@ -3,7 +3,7 @@ import type { UnitWithProgress } from "@/entities/language"
 import LessonBtn from "./lesson-btn.vue"
 import ListHeader from "./list-header.vue"
 import { RouterLink } from "vue-router"
-import UnitDescCard from "./unit-desc-card.vue"
+import UnitDescCard from "./unit-desc-card/unit-desc-card.vue"
 import { useUnitDescCard } from "../model/use-unit-desc-card"
 import { ref, toRefs } from "vue"
 import { useCourseProgressStore } from "../../model/progress-store"
@@ -33,7 +33,8 @@ const progress = useCourseProgressStore()
 
     <UnitDescCard
       v-if="data?.length && desc.unitTitle"
-      :title="`Section ${sectionNumber}, Unit ${desc.unitNumber}`"
+      :section-number="sectionNumber"
+      :unit-number="desc.unitNumber"
       :subtitle="desc.unitTitle"
       class="fixed top-12 left-4 right-4"
     />
@@ -48,7 +49,7 @@ const progress = useCourseProgressStore()
       <ListHeader v-if="i !== 0" :title="unit.title" />
 
       <div class="relative flex flex-col items-center gap-6">
-        <slot name="scroll-to-lesson-btn"/>
+        <slot name="scroll-to-lesson-btn" />
 
         <LessonBtn
           v-for="lesson in unit.lessons"

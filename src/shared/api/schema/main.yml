@@ -17,3 +17,7 @@ paths:
   /sections/{sectionNumber}/units/{unitNumber}/lessons/{lessonNumber}/variants/{variantNumber}:
     get:
       $ref: "./endpoints/units.yml#/getVariantByNumberInLesson"
+
+  /sections/{sectionNumber}/units/{unitNumber}/guidebook:
+    get:
+      $ref: "./endpoints/guidebook.yml#/getGuidebookByUnitAndSectionNumber"

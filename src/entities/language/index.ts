@@ -8,6 +8,14 @@ export type {
   LessonStatus,
 } from "./model/types"
 
+export type {
+  Guidebook,
+  GuidebookContentParagraph,
+  GuidebookContentTable,
+  GuidebookContentImage,
+  GuidebookType,
+} from "./model/guidebook"
+
 export {
   type Word,
   type WordImg,
@@ -34,3 +42,4 @@ export { needToShowTranslation } from "./model/task"
 export { useGetAllSectionsQuery } from "./api/get-all-sections"
 export { useGetUnitsBySectionNumberQuery } from "./api/get-units-by-section-number"
 export { useGetVariantByNumberInLessonQuery } from "./api/get-variant-by-number-in-lesson"
+export { useGetGuidebookByUnitAndSectionNumberQuery } from "./api/get-guidebook-by-unit-and-section-number"

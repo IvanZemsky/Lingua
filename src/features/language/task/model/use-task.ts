@@ -4,7 +4,7 @@ import type { AnswerModel } from "./use-answer"
 import type { ResultModel } from "../../result/use-result"
 import { useCourseProgressStore } from "../../model/progress-store"
 
-const FIRST_TASK_NUMBER: number = 5
+const FIRST_TASK_NUMBER: number = 1
 
 type LessonState = "in-progress" | "finished"
 

@@ -126,6 +126,46 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/sections/{sectionNumber}/units/{unitNumber}/guidebook": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Retrieve a guidebook by unit and section number */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    unitNumber: number;
+                    sectionNumber: number;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description A guidebook */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["Guidebook"];
+                    };
+                };
+                404: components["responses"]["NotFoundError"];
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -283,6 +323,48 @@ export interface components {
             /** @description Unit number of the variant */
             unitNumber: number;
             tasks: components["schemas"]["Task"][];
+        };
+        GuidebookContentParagraph: {
+            id: string;
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "paragraph";
+            text: string;
+        };
+        GuidebookContentImage: {
+            id: string;
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "img";
+            /** Format: uri */
+            url: string;
+            alt?: string;
+        };
+        GuidebookContentTable: {
+            id: string;
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "table";
+            headers: string[];
+            rows: string[][];
+        };
+        GuidebookContent: components["schemas"]["GuidebookContentParagraph"] | components["schemas"]["GuidebookContentImage"] | components["schemas"]["GuidebookContentTable"];
+        Guidebook: {
+            /** @description Unique identifier for the guidebook */
+            id: string;
+            /** @description Section number of the guidebook */
+            sectionNumber: number;
+            /** @description Unit number of the guidebook */
+            unitNumber: number;
+            /** @description Title of the guidebook */
+            title: string;
+            content: components["schemas"]["GuidebookContent"][];
         };
     };
     responses: {
