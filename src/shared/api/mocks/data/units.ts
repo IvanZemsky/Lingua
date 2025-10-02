@@ -73,7 +73,7 @@ export const MOCK_UNITS: components["schemas"]["UnitList"] = [
     id: "unit-3",
     number: 3,
     sectionNumber: 1,
-    title: "First declension",
+    title: "\"Ser de\" to indicate the origin",
     description: "Description of unit 3",
     lessons: [
       {

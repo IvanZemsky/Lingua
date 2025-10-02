@@ -39,4 +39,17 @@ export const MOCK_GUIDEBOOKS: components["schemas"]["Guidebook"][] = [
       },
     ],
   },
+  {
+    id: "guidebook-3",
+    sectionNumber: 1,
+    unitNumber: 3,
+    title: '"Ser de" to indicate the origin',
+    content: [
+      {
+        id: "guidebook-3-content-1",
+        type: "paragraph",
+        text: 'In Spanish, the expression "ser de" is used to indicate a person’s origin or where something comes from. For example: "Soy de México" (I am from Mexico), or "El vino es de España" (The wine is from Spain).',
+      },
+    ],
+  },
 ]
