@@ -34,4 +34,16 @@ export {
   DialogTrigger,
 } from "./kit/dialog"
 
+export {
+  UiTable,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableEmpty,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "./kit/table"
+
 export { UiButton, UiProgress, UiInput, UiTextarea, DonutChart }

@@ -14,4 +14,29 @@ export const MOCK_GUIDEBOOKS: components["schemas"]["Guidebook"][] = [
       },
     ],
   },
+  {
+    id: "guidebook-2",
+    sectionNumber: 1,
+    unitNumber: 2,
+    title: 'Guidebook for unit "Form the plural"',
+    content: [
+      {
+        id: "guidebook-2-content-1",
+        type: "paragraph",
+        text: "In this unit, you will learn how to form the plural of nouns in Spanish. Most nouns ending in a vowel simply add -s, while nouns ending in a consonant add -es.",
+      },
+      {
+        id: "guidebook-2-content-2",
+        type: "table",
+        caption: "Plural forms in Spanish",
+        headers: ["Singular", "Plural", "Translation"],
+        rows: [
+          ["libro", "libros", "book → books"],
+          ["casa", "casas", "house → houses"],
+          ["profesor", "profesores", "teacher → teachers"],
+          ["ciudad", "ciudades", "city → cities"],
+        ],
+      },
+    ],
+  },
 ]

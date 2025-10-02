@@ -80,6 +80,7 @@ schemas:
       - id
       - type
       - headers
+      - caption
       - rows
     properties:
       id:
@@ -92,6 +93,8 @@ schemas:
         type: array
         items:
           type: string
+      caption:
+        type: string
       rows:
         type: array
         items:

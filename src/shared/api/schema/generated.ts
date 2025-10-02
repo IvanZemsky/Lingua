@@ -352,6 +352,7 @@ export interface components {
              */
             type: "table";
             headers: string[];
+            caption: string;
             rows: string[][];
         };
         GuidebookContent: components["schemas"]["GuidebookContentParagraph"] | components["schemas"]["GuidebookContentImage"] | components["schemas"]["GuidebookContentTable"];
