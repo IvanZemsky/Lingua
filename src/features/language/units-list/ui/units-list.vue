@@ -6,7 +6,7 @@ import { RouterLink } from "vue-router"
 import UnitDescCard from "./unit-desc-card/unit-desc-card.vue"
 import { useUnitDescCard } from "../model/use-unit-desc-card"
 import { ref, toRefs } from "vue"
-import { useCourseProgressStore } from "../../model/progress-store"
+import { useCourseProgressStore } from "../../model/progress/store"
 import { getLessonPagePath } from "@/shared/model"
 
 type Props = {

@@ -1,12 +1,18 @@
-export type {
-  Section,
-  Unit,
-  UnitWithProgress,
-  Variant,
-  Lesson,
-  LessonWithProgress,
-  LessonStatus,
-} from "./model/types"
+export type { Section, Variant } from "./model/types"
+export { findSectionByNumber } from "./model/types"
+
+export {
+  type Lesson,
+  type LessonWithProgress,
+  type LessonStatus,
+  findLessonByNumber,
+} from "./model/lesson"
+
+export {
+  type Unit,
+  type UnitWithProgress,
+  findUnitByNumber,
+} from "./model/unit"
 
 export type {
   Guidebook,

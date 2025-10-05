@@ -2,7 +2,7 @@
 import { UiProgress } from "@/shared/ui"
 import { XIcon } from "lucide-vue-next"
 import { computed, toRefs } from "vue"
-import { useCourseProgressStore } from "../../model/progress-store"
+import { useCourseProgressStore } from "../../model/progress/store"
 
 type Props = {
   totalTasks: number

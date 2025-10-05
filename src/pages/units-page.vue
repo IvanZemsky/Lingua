@@ -10,6 +10,7 @@ import {
   useCourseProgressStore,
   ResetProgressBtn,
   ScrollToLessonBtn,
+  convertUnitToUnitWithProgress,
 } from "@/features/language"
 
 const route = useRoute()
@@ -25,7 +26,7 @@ const { data, isFetching, error } = useGetUnitsBySectionNumberQuery<
     if (data) {
       courseProgressStore.units = data
       return {
-        data: courseProgressStore.convertUnitToUnitWithProgress(data),
+        data: convertUnitToUnitWithProgress(data, courseProgressStore.progress),
       }
     }
     return { data }

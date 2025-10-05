@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ArrowUp, ArrowDown } from "lucide-vue-next"
 import { useScrollToLesson } from "../model/use-scroll-to-lesson"
-import type { CourseProgressLS } from "../../model/progress-store"
+import type { CourseProgressLS } from "../../model/progress/store"
 
 const { currentLesson } = defineProps<{
   currentLesson: CourseProgressLS["lesson"]

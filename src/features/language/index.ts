@@ -20,10 +20,12 @@ export { TASK_TYPES_UI } from "./task/model"
 
 export { useScrollToLesson } from "./units-list/model/use-scroll-to-lesson"
 export { useSpeechStore } from "./model/speech-store"
-export { useCourseProgressStore } from "./model/progress-store"
+export { useCourseProgressStore } from "./model/progress/store"
 
 export { useAnswer } from "./task/model/use-answer"
 export { useTask } from "./task/model/use-task"
 export { useResult } from "./result/use-result"
 export { default as ResetProgressBtn } from "./units-list/ui/reset-progress-btn.vue"
-export {default as ScrollToLessonBtn} from "./units-list/ui/scroll-to-lesson-btn.vue"
+export { default as ScrollToLessonBtn } from "./units-list/ui/scroll-to-lesson-btn.vue"
+
+export { convertUnitToUnitWithProgress } from "./model/progress/unit"

@@ -8,7 +8,7 @@ import {
   DialogTitle,
   DialogClose,
 } from "@/shared/ui"
-import { useCourseProgressStore } from "../../model/progress-store"
+import { useCourseProgressStore } from "../../model/progress/store"
 
 const progress = useCourseProgressStore()
 </script>
@@ -26,7 +26,11 @@ const progress = useCourseProgressStore()
             <UiButton>Cancel</UiButton>
           </DialogClose>
           <DialogClose as-child>
-            <UiButton type="submit" variant="destructive" @click="progress.reset">
+            <UiButton
+              type="submit"
+              variant="destructive"
+              @click="progress.reset"
+            >
               Yes
             </UiButton>
           </DialogClose>

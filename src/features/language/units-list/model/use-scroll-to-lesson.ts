@@ -1,5 +1,5 @@
 import { nextTick, onBeforeUnmount, onMounted, ref } from "vue"
-import { type CourseProgressLS } from "../../model/progress-store"
+import { type CourseProgressLS } from "../../model/progress/store"
 
 export function useScrollToLesson(currentLesson: CourseProgressLS["lesson"]) {
   const buttonRef = ref<HTMLButtonElement | null>(null)
