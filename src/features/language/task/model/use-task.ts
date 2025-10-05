@@ -33,7 +33,9 @@ export function useTask(
 
       if (endTaskNumber.value === currentTaskNumber.value) {
         state.value = "finished"
-        progress.updateProgress()
+        if (data.value) {
+          progress.updateProgress(data.value)
+        }
       }
 
       currentTaskNumber.value++

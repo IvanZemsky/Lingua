@@ -1,4 +1,9 @@
-import type { LessonStatus, Unit, UnitWithProgress } from "@/entities/language"
+import type {
+  LessonStatus,
+  Unit,
+  UnitWithProgress,
+  Variant,
+} from "@/entities/language"
 import { useLocalStorage } from "@vueuse/core"
 import { defineStore } from "pinia"
 import { ref } from "vue"
@@ -46,7 +51,9 @@ export const useCourseProgressStore = defineStore("course-progress", () => {
     progress.value = initialProgress
   }
 
-  function updateProgress() {
+  function updateProgress(passedVariant: Variant) {
+    if (isCurrentVariant(progress.value, passedVariant)) return
+
     const { unit, number, variant } = progress.value.lesson
     const currentUnit = units.value.find((u) => u.number === unit)
     if (!currentUnit) return
@@ -76,16 +83,39 @@ export const useCourseProgressStore = defineStore("course-progress", () => {
     unit: number
     number: number
   }): LessonStatus {
-    if (getIsCompleted(lesson, progress.value)) return "completed"
-    if (getIsActive(lesson, progress.value)) return "active"
+    if (isLessonCompleted(lesson, progress.value)) return "completed"
+    if (isLessonActive(lesson, progress.value)) return "active"
 
     return "unreached"
   }
 
-  return { progress, units, convertUnitToUnitWithProgress, updateProgress, reset }
+  return {
+    progress,
+    units,
+    convertUnitToUnitWithProgress,
+    updateProgress,
+    reset,
+  }
 })
 
-function getIsCompleted(
+function isCurrentVariant(
+  progress: CourseProgressLS,
+  passedVariant: Variant,
+): boolean {
+  if (
+    progress.lesson.variant === passedVariant.number &&
+    progress.lesson.unit === passedVariant.unitNumber &&
+    progress.lesson.number === passedVariant.unitNumber &&
+    progress.section === passedVariant.sectionNumber
+  ) {
+    console.log("current")
+    return true
+  }
+  console.log("not current")
+  return false
+}
+
+function isLessonCompleted(
   lesson: {
     unit: number
     number: number
@@ -100,7 +130,7 @@ function getIsCompleted(
   return isUnitCompleted || isCompleted
 }
 
-function getIsActive(
+function isLessonActive(
   lesson: {
     unit: number
     number: number
@@ -122,5 +152,6 @@ function getLessonVariant(
   const isLesson =
     lesson.unit === progress.lesson.unit &&
     lesson.number === progress.lesson.number
+    
   return isLesson ? progress.lesson.variant : 1
 }
