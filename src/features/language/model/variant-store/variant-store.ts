@@ -1,12 +1,13 @@
 import { defineStore } from "pinia"
-import { reactive, shallowRef } from "vue"
+import { reactive, } from "vue"
 import { useTask } from "./use-task"
 import { useResult } from "./use-result"
 import { useAnswer } from "./use-answer"
 import type { Variant } from "@/entities/language"
+import { ref } from "vue"
 
 export const useVariantStore = defineStore("variant", () => {
-  const data = shallowRef<Variant | null>(null)
+  const data = ref<Variant | null>(null)
 
   const answer = reactive(useAnswer())
   const result = reactive(useResult())
@@ -18,6 +19,9 @@ export const useVariantStore = defineStore("variant", () => {
 
   function reset() {
     data.value = null
+    task.reset()
+    answer.reset()
+    result.reset()
   }
 
   return { data, setData, reset, answer, result, task }

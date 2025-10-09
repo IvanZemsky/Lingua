@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { needToShowTranslation } from "@/entities/language"
 import AnswerMsg from "./answer-msg.vue"
-import { useVariantStore } from "@/features/language/model/variant-store/variant-store"
+import { useVariantStore } from "@/features/language"
 import { storeToRefs } from "pinia"
 
 defineEmits<{

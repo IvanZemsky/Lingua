@@ -35,6 +35,12 @@ export function useAnswer() {
     isChecked.value = false
   }
 
+  function reset() {
+    answerValue.value = ""
+    isCorrect.value = false
+    isChecked.value = false
+  }
+
   return {
     answerValue,
     isCorrect,
@@ -43,6 +49,7 @@ export function useAnswer() {
     checkAnswer,
     handleCorrect,
     handleIncorrect,
+    reset,
   }
 }
 

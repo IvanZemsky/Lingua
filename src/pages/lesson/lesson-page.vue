@@ -11,25 +11,30 @@ import {
 import { useGetPageParams } from "./use-get-page-params"
 import LessonFooter from "./lesson-footer.vue"
 import { storeToRefs } from "pinia"
-import { watch } from "vue"
+import { onBeforeMount, watch } from "vue"
 
 const params = useGetPageParams()
 
 const store = useVariantStore()
 const { task, answer, result } = storeToRefs(store)
-const { data, isFetching, error } = useGetVariantByNumberInLessonQuery(params, {
-  afterFetch: ({ data }) => {
-    if (data) {
-      store.setData(data)
-    }
-    return { data }
+const { data, isFetching, error, execute } = useGetVariantByNumberInLessonQuery(
+  params.value,
+  {
+    afterFetch: ({ data }) => {
+      if (data) {
+        store.setData(data)
+      }
+      return { data }
+    },
   },
+)
+
+watch(params, () => {
+  execute()
 })
 
-watch(isFetching, () => {
-  if (isFetching.value) {
-    store.reset()
-  }
+onBeforeMount(() => {
+  store.reset()
 })
 
 const speechStore = useSpeechStore()
