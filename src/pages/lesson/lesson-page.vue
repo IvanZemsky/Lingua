@@ -4,27 +4,35 @@ import {
   TASK_TYPES_UI,
   TaskLayout,
   VariantHeader,
-  TaskBtn,
   useSpeechStore,
-  useAnswer,
-  useTask,
-  useResult,
   LessonEndScreen,
+  useVariantStore,
 } from "@/features/language"
-import { UiButton } from "@/shared/ui"
 import { useGetPageParams } from "./use-get-page-params"
 import LessonFooter from "./lesson-footer.vue"
-import { reactive } from "vue"
-import { RouterLink } from "vue-router"
+import { storeToRefs } from "pinia"
+import { watch } from "vue"
 
 const params = useGetPageParams()
 
-const { data, isFetching, error } = useGetVariantByNumberInLessonQuery(params)
-const speechStore = useSpeechStore()
+const store = useVariantStore()
+const { task, answer, result } = storeToRefs(store)
+const { data, isFetching, error } = useGetVariantByNumberInLessonQuery(params, {
+  afterFetch: ({ data }) => {
+    if (data) {
+      store.setData(data)
+    }
+    return { data }
+  },
+})
 
-const answer = reactive(useAnswer())
-const result = reactive(useResult())
-const task = reactive(useTask(data, answer, result))
+watch(isFetching, () => {
+  if (isFetching.value) {
+    store.reset()
+  }
+})
+
+const speechStore = useSpeechStore()
 </script>
 
 <template>
@@ -40,6 +48,7 @@ const task = reactive(useTask(data, answer, result))
     </template>
 
     <component
+      class="max-h-[500px] w-full"
       v-if="task.state === 'in-progress' && task.currentTask"
       :key="task.currentTask.number"
       v-model:answer="answer.answerValue"
@@ -47,32 +56,11 @@ const task = reactive(useTask(data, answer, result))
       :data="task.currentTask"
       @play-audio="speechStore.speak"
     />
+
     <LessonEndScreen v-else :result="result.result" />
 
     <template #footer>
-      <LessonFooter
-        v-if="task.currentTask && task.state === 'in-progress'"
-        :current-task="task.currentTask"
-        :is-answer-correct="answer.isCorrect"
-        :is-answer-checked="answer.isChecked"
-        @skip="task.skip"
-      >
-        <template #task-btn>
-          <TaskBtn
-            :variant="answer.variant"
-            :disabled="!answer.isChecked && !answer.answerValue"
-            @click="task.handleBtnClick"
-          />
-        </template>
-      </LessonFooter>
-      <UiButton
-        v-if="task.state === 'finished'"
-        :as="RouterLink"
-        :to="`/sections/${params.sectionNumber}`"
-        class="w-full text-xl h-14 font-semibold uppercase"
-      >
-        Continue
-      </UiButton>
+      <LessonFooter :section-number="params.sectionNumber" />
     </template>
   </TaskLayout>
 </template>

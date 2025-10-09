@@ -19,7 +19,7 @@ const { progress } = toRefs(useCourseProgressStore())
 </script>
 
 <template>
-  <div class="flex items-center gap-4">
+  <div class="flex items-center gap-4 w-full">
     <RouterLink :to="`/sections/${progress.section}`">
       <XIcon />
     </RouterLink>

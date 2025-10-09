@@ -7,11 +7,8 @@ export function useAnswer() {
   const variant = computed(getVariant)
 
   function checkAnswer(result: string[] | string | undefined) {
-    console.log("check")
     if (!result) return
     const isAnswerCorrect = compareWithResult(result)
-
-    console.log(isAnswerCorrect)
 
     isCorrect.value = isAnswerCorrect
     isChecked.value = true

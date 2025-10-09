@@ -1,31 +1,35 @@
 <script setup lang="ts">
-import { needToShowTranslation, type Task } from "@/entities/language"
-import { AnswerMsg } from "@/features/language"
+import { TaskBtn, useVariantStore, LessonAnswerMsg } from "@/features/language"
+import { storeToRefs } from "pinia"
+import { UiButton } from "@/shared/ui"
+import { RouterLink } from "vue-router"
 
-defineProps<{
-  isAnswerCorrect: boolean
-  isAnswerChecked: boolean
-  currentTask: Task
-}>()
+defineProps<{ sectionNumber: number }>()
 
-defineEmits<{
-  (e: "skip"): void
-}>()
+const { task, answer } = storeToRefs(useVariantStore())
 </script>
 
 <template>
-  <slot name="task-btn" />
+  <div class="w-full" v-if="task.currentTask && task.state === 'in-progress'">
+    <TaskBtn
+      :variant="answer.variant"
+      :disabled="!answer.isChecked && !answer.answerValue"
+      @click="task.handleBtnClick"
+    />
 
-  <AnswerMsg v-if="isAnswerChecked" :is-answer-correct="isAnswerCorrect">
-    <p v-if="isAnswerCorrect">
-      Correct <br />
-      <span class="text-[18px]" v-if="needToShowTranslation(currentTask)">
-        Translation: {{ currentTask.translation }}
-      </span>
-    </p>
-    <p v-if="isAnswerChecked && !isAnswerCorrect">
-      Incorrect. Please, try again or
-      <span class="underline" @click="$emit('skip')">skip</span>.
-    </p>
-  </AnswerMsg>
+    <LessonAnswerMsg
+      v-if="answer.isChecked"
+      :section-number="sectionNumber"
+      @skip="task.skip"
+    />
+  </div>
+
+  <UiButton
+    v-if="task.state === 'finished'"
+    :as="RouterLink"
+    :to="`/sections/${sectionNumber}`"
+    class="w-full text-xl h-14 font-semibold uppercase"
+  >
+    Continue
+  </UiButton>
 </template>

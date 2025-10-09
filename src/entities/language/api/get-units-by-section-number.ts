@@ -1,5 +1,5 @@
 import { type AfterFetchContext, type UseFetchOptions } from "@vueuse/core"
-import { type Unit } from "../model/types"
+import { type Unit } from "../model/unit"
 import { useFetchClient } from "@/shared/api"
 
 export function useGetUnitsBySectionNumberQuery<T = Unit, U = Unit>(

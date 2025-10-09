@@ -1,7 +1,7 @@
 import type { Variant } from "@/entities/language"
 import { computed, ref, type ShallowRef } from "vue"
-import type { AnswerModel } from "./use-answer"
-import type { ResultModel } from "../../result/use-result"
+import type { AnswerModel } from "../../model/variant-store/use-answer"
+import type { ResultModel } from "./use-result"
 import { useCourseProgressStore } from "../../model/progress/store"
 
 const FIRST_TASK_NUMBER: number = 5

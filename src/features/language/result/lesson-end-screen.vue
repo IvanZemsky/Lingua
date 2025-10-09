@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { UiCard, CardContent } from "@/shared/ui"
-import type { LessonResult } from "./use-result"
+import type { LessonResult } from "../model/variant-store/use-result"
 
 const { result } = defineProps<{ result: LessonResult }>()
 </script>
